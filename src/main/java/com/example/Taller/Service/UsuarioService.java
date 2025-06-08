@@ -1,0 +1,15 @@
+package com.example.Taller.Service;
+
+import com.example.Taller.Entity.UsuarioEntity;
+
+import java.util.List;
+
+public interface UsuarioService {
+    UsuarioEntity guardarUsuario(UsuarioEntity usuario);
+
+    UsuarioEntity obtenerUsuarioPorEmail(String email);
+
+    List<UsuarioEntity> obtenerTodosLosUsuarios();
+
+    String eliminarUsuario(String email);
+}
