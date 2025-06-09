@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PresupuestoServiceImpl extends PresupuestoService{
+public class PresupuestoServiceImpl implements PresupuestoService{
     @Autowired
     private PresupuestoRepository presupuestoRepository;
 
