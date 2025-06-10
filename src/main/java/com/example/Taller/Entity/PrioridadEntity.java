@@ -12,6 +12,17 @@ public class PrioridadEntity {
     @Column(nullable = false, unique = true)
     private String nombre;
 
+    @Column(nullable = false, unique = true)
+    private Integer nivel;
+
+    public Integer getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Integer nivel) {
+        this.nivel = nivel;
+    }
+
     public Integer getId() {
         return id;
     }
