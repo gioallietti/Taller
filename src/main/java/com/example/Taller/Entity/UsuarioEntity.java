@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "usuarios")
-public class UsuarioEntity {
-    @Id
+public class UsuarioEntity extends PersonaEntity {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://127.0.0.1:5500", "http://localhost:5500"})
 @RequestMapping("/usuarios")
 public class UsuarioController {
     @Autowired
@@ -34,5 +34,16 @@ public class UsuarioController {
     @DeleteMapping("/{email}")
     public ResponseEntity<String> eliminarUsuario(@PathVariable String email) {
         return ResponseEntity.ok(usuarioService.eliminarUsuario(email));
+    }
+
+    @PostMapping ("/login")
+    public ResponseEntity<?> login(@RequestBody UsuarioEntity usuario){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(usuarioService.login(usuario));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontró usuario");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 }

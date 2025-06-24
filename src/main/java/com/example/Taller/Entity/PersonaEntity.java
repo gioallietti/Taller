@@ -2,8 +2,7 @@ package com.example.Taller.Entity;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "personas")
+@MappedSuperclass
 public class PersonaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

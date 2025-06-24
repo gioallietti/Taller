@@ -3,6 +3,7 @@ package com.example.Taller.Service;
 import com.example.Taller.Entity.UsuarioEntity;
 import com.example.Taller.Repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +37,16 @@ public class UsuarioServiceImpl implements UsuarioService{
         }
         usuarioRepository.deleteById(email);
         return "Usuario eliminado con éxito";
+    }
+
+    public UsuarioEntity login(UsuarioEntity usuarioEntity) throws BadRequestException {
+        try {
+            return usuarioRepository.findByEmailAndPassword(
+                    usuarioEntity.getEmail(),
+                    usuarioEntity.getPassword()
+            );
+        } catch (RuntimeException e) {
+            throw new BadRequestException("Credenciales incorrectas");
+        }
     }
 }
