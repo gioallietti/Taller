@@ -3,6 +3,7 @@ package com.example.Taller.Service;
 import com.example.Taller.Entity.EquipoEntity;
 import com.example.Taller.Entity.TipoEquipoEntity;
 import com.example.Taller.Repository.EquipoRepository;
+import com.example.Taller.Repository.TipoEquipoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ import java.util.List;
 public class EquipoServiceImpl implements EquipoService{
     @Autowired
     private EquipoRepository equipoRepository;
+
+    @Autowired
+    private TipoEquipoRepository tipoEquipoRepository;
 
     public EquipoEntity guardarEquipo(EquipoEntity equipo) {
         return (EquipoEntity) this.equipoRepository.save(equipo);
@@ -35,7 +39,10 @@ public class EquipoServiceImpl implements EquipoService{
         }
     }
 
-    public List<EquipoEntity> buscarPorTipoEquipo(TipoEquipoEntity tipoEquipo) {
-        return this.equipoRepository.findByTipoEquipo(tipoEquipo);
+    @Override
+    public List<EquipoEntity> listarEquiposPorTipoEquipo(int tipoEquipoId) {
+        TipoEquipoEntity tipoEquipo = this.tipoEquipoRepository.findById(tipoEquipoId).orElseThrow(() -> new EntityNotFoundException("Tipo de equipo no encontrado"));
+        List<EquipoEntity> equipos = this.equipoRepository.findByTipoEquipo(tipoEquipo);
+        return equipos;
     }
 }

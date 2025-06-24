@@ -9,5 +9,4 @@ import java.util.List;
 public interface EquipoRepository extends JpaRepository<EquipoEntity, Integer> {
 
     List<EquipoEntity> findByTipoEquipo(TipoEquipoEntity tipoEquipo);
-
 }

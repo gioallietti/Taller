@@ -46,9 +46,9 @@ public class EquipoController {
         return ResponseEntity.ok(equipoService.eliminarEquipo(id));
     }
 
-    /*@GetMapping({"/tipoEquipo/{idTipoEquipo}"})
-    public ResponseEntity<?> buscarPorTipoEquipo(@PathVariable int idTipoEquipo) {
-        TipoEquipoEntity tipoEquipo = (TipoEquipoEntity)this.tipoEquipoService.findById(idTipoEquipo).orElseThrow(() -> new EntityNotFoundException("Tipo de equipo no encontrado"));
-        return ResponseEntity.status(HttpStatus.OK).body(this.equipoService.buscarPorTipoEquipo(tipoEquipo));
-    }*/
+    @GetMapping({"/tipoEquipo/{tipoEquipoId}"})
+    public ResponseEntity<List<EquipoEntity>> listarComprasPorUsuario(@PathVariable int tipoEquipoId) {
+        List<EquipoEntity> equipo = this.equipoService.listarEquiposPorTipoEquipo(tipoEquipoId);
+        return ResponseEntity.ok(equipo);
+    }
 }

@@ -15,6 +15,6 @@ public interface EquipoService {
 
     String eliminarEquipo(int id);
 
-    List<EquipoEntity> buscarPorTipoEquipo(TipoEquipoEntity tipoEquipo);
+    List<EquipoEntity> listarEquiposPorTipoEquipo(int tipoEquipoId);
 
 }
