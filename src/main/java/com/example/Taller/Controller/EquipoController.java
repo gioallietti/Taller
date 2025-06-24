@@ -26,7 +26,7 @@ public class EquipoController {
     @Autowired
     private EquipoService equipoService;
 
-    @PostMapping
+    @PostMapping({"/crea"})
     public ResponseEntity<EquipoEntity> guardarEquipo(@RequestBody EquipoEntity equipo) {
         return ResponseEntity.ok(equipoService.guardarEquipo(equipo));
     }

@@ -2,12 +2,12 @@ package com.example.Taller.Entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "ingresos")
-
 public class IngresoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,9 +33,9 @@ public class IngresoEntity {
     private PrioridadEntity prioridad;
 
     @Column(nullable = false)
-    private LocalDateTime fechaIngreso;
+    private LocalDate fechaIngreso;
 
-    private LocalDateTime fechaFinalizacion;
+    private LocalDate fechaFinalizacion;
 
     @ManyToOne(optional = false)
     private EstadoEntity estado;
@@ -113,19 +113,19 @@ public class IngresoEntity {
         this.prioridad = prioridad;
     }
 
-    public LocalDateTime getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(LocalDateTime fechaIngreso) {
+    public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public LocalDateTime getFechaFinalizacion() {
+    public LocalDate getFechaFinalizacion() {
         return fechaFinalizacion;
     }
 
-    public void setFechaFinalizacion(LocalDateTime fechaFinalizacion) {
+    public void setFechaFinalizacion(LocalDate fechaFinalizacion) {
         this.fechaFinalizacion = fechaFinalizacion;
     }
 

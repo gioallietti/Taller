@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -34,5 +36,21 @@ public class IngresoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarIngreso(@PathVariable int id) {
         return ResponseEntity.ok(ingresoService.eliminarIngreso(id));
+    }
+
+    @GetMapping("/ordenPrioridad")
+    public ResponseEntity<List<IngresoEntity>> listarPorPrioridad(){
+        return ResponseEntity.ok(ingresoService.listarPorPrioridad());
+    }
+
+    @GetMapping("/rangoFecha")
+    public ResponseEntity<?> buscarPorRangoFecha(@RequestParam String fechaInicio, @RequestParam String fechaFin){
+        LocalDate fechaDesde = LocalDate.parse(fechaInicio);
+        LocalDate fechaHasta = LocalDate.parse(fechaFin);
+
+        if (fechaDesde.isAfter(fechaHasta)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La fecha de inicio no puede ser despues a la fecha de fin");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(ingresoService.ingresosPorFechas(fechaDesde, fechaHasta));
     }
 }

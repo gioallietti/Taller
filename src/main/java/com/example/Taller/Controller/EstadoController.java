@@ -22,7 +22,7 @@ public class EstadoController {
     private EstadoService estadoService;
 
     @PostMapping({"/crea"})
-    public ResponseEntity<EstadoEntity> agregarEstado(@RequestBody EstadoEntity estado) {
+    public ResponseEntity<EstadoEntity> guardarEstado(@RequestBody EstadoEntity estado) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.estadoService.guardarEstado(estado));
     }
 

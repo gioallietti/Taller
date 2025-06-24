@@ -1,10 +1,11 @@
 package com.example.Taller.Entity;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "clientes")
+@DiscriminatorValue("CLIENTE")
 public class ClienteEntity extends PersonaEntity{
 
 }

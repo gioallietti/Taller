@@ -17,7 +17,7 @@ public class RepuestoController {
     private RepuestoService repuestoService;
 
     @PostMapping("/crea")
-    public ResponseEntity<RepuestoEntity> agregarRepuesto(@RequestBody RepuestoEntity repuesto) {
+    public ResponseEntity<RepuestoEntity> guardarRepuesto(@RequestBody RepuestoEntity repuesto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(repuestoService.guardarRepuesto(repuesto));
     }
 
