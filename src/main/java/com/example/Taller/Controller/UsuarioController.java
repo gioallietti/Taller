@@ -35,4 +35,15 @@ public class UsuarioController {
     public ResponseEntity<String> eliminarUsuario(@PathVariable String email) {
         return ResponseEntity.ok(usuarioService.eliminarUsuario(email));
     }
+
+    @PostMapping ("/login")
+    public ResponseEntity<?> login(@RequestBody UsuarioEntity usuario){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(usuarioService.login(usuario));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontró usuario");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }
