@@ -46,6 +46,6 @@ public class IngresoServiceImpl implements IngresoService{
 
     @Override
     public List<IngresoEntity> ingresosPorFechas(LocalDate desde, LocalDate hasta) {
-        return this.ingresoRepository.findByFechaCompra(desde, hasta);
+        return this.ingresoRepository.findByFechaIngresoBetween(desde, hasta);
     }
 }

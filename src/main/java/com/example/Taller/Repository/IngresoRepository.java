@@ -9,6 +9,6 @@ import java.util.List;
 public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer> {
     List<IngresoEntity> findAllByOrderByPrioridadAsc();
 
-    List<IngresoEntity> findByFechaCompra(LocalDate desde, LocalDate hasta);
+    List<IngresoEntity> findByFechaIngresoBetween(LocalDate desde, LocalDate hasta);
 
 }

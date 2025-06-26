@@ -42,7 +42,6 @@ public class EquipoServiceImpl implements EquipoService{
     @Override
     public List<EquipoEntity> listarEquiposPorTipoEquipo(int tipoEquipoId) {
         TipoEquipoEntity tipoEquipo = this.tipoEquipoRepository.findById(tipoEquipoId).orElseThrow(() -> new EntityNotFoundException("Tipo de equipo no encontrado"));
-        List<EquipoEntity> equipos = this.equipoRepository.findByTipoEquipo(tipoEquipo);
-        return equipos;
+        return this.equipoRepository.findByTipoEquipo(tipoEquipo);
     }
 }
