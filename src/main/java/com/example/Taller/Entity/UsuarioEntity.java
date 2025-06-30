@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "usuarios")
 public class UsuarioEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
@@ -21,11 +24,19 @@ public class UsuarioEntity {
     @Column(nullable = false)
     private String apellido;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String telefono;
 
     @Column(nullable = false, unique = true)
     private String cedula;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;

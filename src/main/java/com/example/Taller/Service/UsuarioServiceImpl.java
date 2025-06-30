@@ -21,8 +21,17 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public UsuarioEntity obtenerUsuarioPorEmail(String email) {
-        return usuarioRepository.findById(email)
-                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con email: " + email));
+        UsuarioEntity usuarioEmail = usuarioRepository.findByEmail(email);
+        if (usuarioEmail == null){
+            throw new EntityNotFoundException("Usuario no encontrado con email: " + email);
+        }else{
+            return usuarioEmail;
+        }
+    }
+
+    public UsuarioEntity obtenerUsuarioPorId(int id) {
+        return (UsuarioEntity) this.usuarioRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("Tipo de usuario encontrado con id: " + id));
     }
 
     @Override
@@ -31,11 +40,11 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public String eliminarUsuario(String email) {
-        if (!usuarioRepository.existsById(email)) {
-            throw new EntityNotFoundException("El usuario con email " + email + " no existe");
+    public String eliminarUsuario(int id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new EntityNotFoundException("El usuario con id " + id + " no existe");
         }
-        usuarioRepository.deleteById(email);
+        usuarioRepository.deleteById(id);
         return "Usuario eliminado con éxito";
     }
 

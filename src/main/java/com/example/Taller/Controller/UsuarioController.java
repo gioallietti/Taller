@@ -1,5 +1,6 @@
 package com.example.Taller.Controller;
 
+import com.example.Taller.Entity.TipoUsuarioEntity;
 import com.example.Taller.Entity.UsuarioEntity;
 import com.example.Taller.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,13 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.guardarUsuario(usuario));
     }
 
-    @GetMapping("/{email}")
-    public ResponseEntity<UsuarioEntity> obtenerUsuario(@PathVariable String email) {
+    @GetMapping({"/{id}"})
+    public ResponseEntity<UsuarioEntity> obtenerUsuarioPorId(@PathVariable int id) {
+        return ResponseEntity.ok(this.usuarioService.obtenerUsuarioPorId(id));
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UsuarioEntity> obtenerUsuarioPorEmail(@PathVariable String email) {
         return ResponseEntity.ok(usuarioService.obtenerUsuarioPorEmail(email));
     }
 
@@ -31,9 +37,9 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.obtenerTodosLosUsuarios());
     }
 
-    @DeleteMapping("/{email}")
-    public ResponseEntity<String> eliminarUsuario(@PathVariable String email) {
-        return ResponseEntity.ok(usuarioService.eliminarUsuario(email));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarUsuario(@PathVariable int id) {
+        return ResponseEntity.ok(usuarioService.eliminarUsuario(id));
     }
 
     @PostMapping ("/login")

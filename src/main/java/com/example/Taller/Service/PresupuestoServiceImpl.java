@@ -15,6 +15,11 @@ public class PresupuestoServiceImpl implements PresupuestoService{
 
     @Override
     public PresupuestoEntity guardarPresupuesto(PresupuestoEntity presupuesto) {
+        double totalSinIva = presupuesto.getCostoRepuesto() + presupuesto.getManoDeObra();
+        presupuesto.setTotalSinIva(totalSinIva);
+        double totalConIva = presupuesto.getTotalSinIva() + (presupuesto.getTotalSinIva() * 0.22);
+        presupuesto.setTotalIva(totalConIva);
+
         return presupuestoRepository.save(presupuesto);
     }
 
