@@ -48,6 +48,10 @@ public class PresupuestoServiceImpl implements PresupuestoService{
         if (!presupuestoRepository.existsById(id)) {
             throw new EntityNotFoundException("El presupuesto con id " + id + " no existe");
         }
+        double totalSinIva = presupuesto.getCostoRepuesto() + presupuesto.getManoDeObra();
+        presupuesto.setTotalSinIva(totalSinIva);
+        double totalConIva = presupuesto.getTotalSinIva() + (presupuesto.getTotalSinIva() * 0.22);
+        presupuesto.setTotalIva(totalConIva);
         presupuesto.setId(id);
         return presupuestoRepository.save(presupuesto);
     }

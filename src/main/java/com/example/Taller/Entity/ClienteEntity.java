@@ -15,7 +15,7 @@ public class ClienteEntity{
     @Column(nullable = false)
     private String apellido;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String telefono;
 
     @Column(nullable = false, unique = true)
