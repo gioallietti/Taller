@@ -37,4 +37,13 @@ public class ClienteServiceImpl implements ClienteService{
         clienteRepository.deleteById(id);
         return "Cliente eliminado correctamente";
     }
+
+    @Override
+    public ClienteEntity actualizarCliente(int id, ClienteEntity cliente) {
+        if (!clienteRepository.existsById(id)) {
+            throw new EntityNotFoundException("El cliente con id " + id + " no existe");
+        }
+        cliente.setId(id);
+        return clienteRepository.save(cliente);
+    }
 }

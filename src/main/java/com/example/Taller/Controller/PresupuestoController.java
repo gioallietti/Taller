@@ -35,4 +35,9 @@ public class PresupuestoController {
     public ResponseEntity<String> eliminarPresupuesto(@PathVariable int id) {
         return ResponseEntity.ok(presupuestoService.eliminarPresupuesto(id));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PresupuestoEntity> actualizarPresupuesto(@PathVariable int id, @RequestBody PresupuestoEntity presupuesto) {
+        return ResponseEntity.ok(presupuestoService.actualizarPresupuesto(id, presupuesto));
+    }
 }

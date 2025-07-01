@@ -12,4 +12,6 @@ public interface PresupuestoService {
     List<PresupuestoEntity> obtenerTodosLosPresupuestos();
 
     String eliminarPresupuesto(int id);
+
+    PresupuestoEntity actualizarPresupuesto(int id, PresupuestoEntity presupuesto);
 }

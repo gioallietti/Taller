@@ -1,6 +1,7 @@
 package com.example.Taller.Service;
 
 import com.example.Taller.Entity.TipoEquipoEntity;
+import com.example.Taller.Entity.TipoUsuarioEntity;
 
 import java.util.List;
 
@@ -12,4 +13,7 @@ public interface TipoEquipoService {
     List<TipoEquipoEntity> obtenerTodosLosTipoEquipos();
 
     String eliminarTipoEquipo(int id);
+
+    TipoEquipoEntity actualizarTipoEquipo(int id, TipoEquipoEntity tipoEquipo);
+
 }

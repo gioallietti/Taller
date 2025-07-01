@@ -14,4 +14,6 @@ public interface EstadoService {
 
     String eliminarEstado(int id);
 
+    EstadoEntity actualizarEstado(int id, EstadoEntity estado);
+
 }

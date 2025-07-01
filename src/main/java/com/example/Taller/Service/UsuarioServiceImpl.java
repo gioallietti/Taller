@@ -58,4 +58,13 @@ public class UsuarioServiceImpl implements UsuarioService{
             throw new BadRequestException("Mail o contraseña incorrectas");
         }
     }
+
+    @Override
+    public UsuarioEntity actualizarUsuario(int id, UsuarioEntity usuario) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new EntityNotFoundException("El usuario con id " + id + " no existe");
+        }
+        usuario.setId(id);
+        return usuarioRepository.save(usuario);
+    }
 }

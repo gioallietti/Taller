@@ -38,4 +38,13 @@ public class RepuestoServiceImpl implements RepuestoService{
         repuestoRepository.deleteById(id);
         return "Repuesto eliminado con éxito";
     }
+
+    @Override
+    public RepuestoEntity actualizarRepuesto(int id, RepuestoEntity repuesto) {
+        if (!repuestoRepository.existsById(id)) {
+            throw new EntityNotFoundException("El repuesto con id " + id + " no existe");
+        }
+        repuesto.setId(id);
+        return repuestoRepository.save(repuesto);
+    }
 }

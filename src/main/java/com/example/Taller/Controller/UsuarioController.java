@@ -1,6 +1,5 @@
 package com.example.Taller.Controller;
 
-import com.example.Taller.Entity.TipoUsuarioEntity;
 import com.example.Taller.Entity.UsuarioEntity;
 import com.example.Taller.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +50,10 @@ public class UsuarioController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UsuarioEntity> actualizarUsuario(@PathVariable int id, @RequestBody UsuarioEntity usuario) {
+        return ResponseEntity.ok(usuarioService.actualizarUsuario(id, usuario));
     }
 }

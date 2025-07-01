@@ -18,4 +18,5 @@ public interface UsuarioService {
 
     UsuarioEntity obtenerUsuarioPorId(int id);
 
+    UsuarioEntity actualizarUsuario(int id, UsuarioEntity usuario);
 }

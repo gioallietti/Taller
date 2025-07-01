@@ -13,4 +13,7 @@ public interface PrioridadService {
     List<PrioridadEntity> obtenerTodasLasPrioridades();
 
     String eliminarPrioridad(int id);
+
+    PrioridadEntity actualizarPrioridad(int id, PrioridadEntity prioridad);
+
 }

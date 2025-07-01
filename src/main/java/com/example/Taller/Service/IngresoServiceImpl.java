@@ -48,4 +48,13 @@ public class IngresoServiceImpl implements IngresoService{
     public List<IngresoEntity> ingresosPorFechas(LocalDate desde, LocalDate hasta) {
         return this.ingresoRepository.findByFechaIngresoBetween(desde, hasta);
     }
+
+    @Override
+    public IngresoEntity actualizarIngreso(int id, IngresoEntity ingreso) {
+        if (!ingresoRepository.existsById(id)) {
+            throw new EntityNotFoundException("El ingreso con id " + id + " no existe");
+        }
+        ingreso.setId(id);
+        return ingresoRepository.save(ingreso);
+    }
 }

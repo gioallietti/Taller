@@ -1,13 +1,10 @@
 package com.example.Taller.Controller;
 
 import com.example.Taller.Entity.EquipoEntity;
-import com.example.Taller.Entity.TipoEquipoEntity;
 import com.example.Taller.Service.EquipoService;
 import com.example.Taller.Service.MarcaService;
 import com.example.Taller.Service.TipoEquipoService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,5 +47,10 @@ public class EquipoController {
     public ResponseEntity<List<EquipoEntity>> listarComprasPorUsuario(@PathVariable int tipoEquipoId) {
         List<EquipoEntity> equipo = this.equipoService.listarEquiposPorTipoEquipo(tipoEquipoId);
         return ResponseEntity.ok(equipo);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EquipoEntity> actualizarEquipo(@PathVariable int id, @RequestBody EquipoEntity equipo) {
+        return ResponseEntity.ok(equipoService.actualizarEquipo(id, equipo));
     }
 }

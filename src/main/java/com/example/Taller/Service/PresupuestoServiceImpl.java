@@ -42,4 +42,13 @@ public class PresupuestoServiceImpl implements PresupuestoService{
         presupuestoRepository.deleteById(id);
         return "Presupuesto eliminado con éxito";
     }
+
+    @Override
+    public PresupuestoEntity actualizarPresupuesto(int id, PresupuestoEntity presupuesto) {
+        if (!presupuestoRepository.existsById(id)) {
+            throw new EntityNotFoundException("El presupuesto con id " + id + " no existe");
+        }
+        presupuesto.setId(id);
+        return presupuestoRepository.save(presupuesto);
+    }
 }
