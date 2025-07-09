@@ -20,9 +20,8 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public UsuarioEntity obtenerUsuarioPorEmail(String email) {
-        return usuarioRepository.findById(email)
-                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con email: " + email));
+    public boolean obtenerUsuarioPorEmail(String email) {
+        return usuarioRepository.existsByEmail(email);
     }
 
     @Override

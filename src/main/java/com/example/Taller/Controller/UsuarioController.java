@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"*"})
 @RequestMapping("/usuarios")
 public class UsuarioController {
     @Autowired
@@ -22,8 +22,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<UsuarioEntity> obtenerUsuario(@PathVariable String email) {
-        return ResponseEntity.ok(usuarioService.obtenerUsuarioPorEmail(email));
+    public boolean obtenerUsuario(@PathVariable String email) {
+        return usuarioService.obtenerUsuarioPorEmail(email);
     }
 
     @GetMapping("/todos")

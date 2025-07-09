@@ -16,6 +16,12 @@ public class IngresoEntity {
     @ManyToOne(optional = false)
     private ClienteEntity cliente;
 
+    @ManyToOne(optional = false)
+    private UsuarioEntity registradoPor;
+
+    @ManyToOne(optional = false)
+    private UsuarioEntity reparadoPor;
+
     @ManyToMany
     @JoinTable(name = "ingresoEquipo")
     private List<EquipoEntity> equipos;
@@ -72,6 +78,14 @@ public class IngresoEntity {
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
     }
+
+    public UsuarioEntity getRegistradoPor() { return registradoPor; }
+
+    public void setRegistradoPor(UsuarioEntity registradoPor) { this.registradoPor = registradoPor; }
+
+    public UsuarioEntity getReparadoPor() { return reparadoPor; }
+
+    public void setReparadoPor(UsuarioEntity reparadoPor) { this.reparadoPor = reparadoPor; }
 
     public List<EquipoEntity> getEquipos() {
         return equipos;

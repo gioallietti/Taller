@@ -8,7 +8,7 @@ import java.util.List;
 public interface UsuarioService {
     UsuarioEntity guardarUsuario(UsuarioEntity usuario);
 
-    UsuarioEntity obtenerUsuarioPorEmail(String email);
+    boolean obtenerUsuarioPorEmail(String email);
 
     List<UsuarioEntity> obtenerTodosLosUsuarios();
 

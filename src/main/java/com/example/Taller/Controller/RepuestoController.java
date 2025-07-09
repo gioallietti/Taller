@@ -36,4 +36,9 @@ public class RepuestoController {
         return ResponseEntity.ok(repuestoService.eliminarRepuesto(id));
     }
 
+    @PatchMapping("/{id}/actualizar")
+    public ResponseEntity<RepuestoEntity> actualizarCantidadRepuesto(@PathVariable int id, @RequestParam int cantidad){
+        return ResponseEntity.ok(repuestoService.actualizarCantidadRepuesto(id, cantidad));
+    }
+
 }

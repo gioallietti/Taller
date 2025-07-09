@@ -27,6 +27,9 @@ public class RepuestoEntity {
     private String descripcion;
 
     @Column(nullable = false)
+    private int cantidad;
+
+    @Column(nullable = false)
     private LocalDate fecha;
 
     public Integer getId() {
@@ -80,6 +83,10 @@ public class RepuestoEntity {
     public LocalDate getFecha() {
         return fecha;
     }
+
+    public int getCantidad() { return cantidad; }
+
+    public void setCantidad(int cantidad) { this.cantidad = cantidad; }
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
