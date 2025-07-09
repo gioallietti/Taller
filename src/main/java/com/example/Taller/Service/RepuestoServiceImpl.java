@@ -38,13 +38,4 @@ public class RepuestoServiceImpl implements RepuestoService{
         repuestoRepository.deleteById(id);
         return "Repuesto eliminado con éxito";
     }
-
-    @Override
-    public RepuestoEntity actualizarCantidadRepuesto(int id, int cantidad){
-        RepuestoEntity repuesto = repuestoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Repuesto no encontrado con id: " + id));
-        int nuevaCantidad = repuesto.getCantidad() + cantidad;
-        repuesto.setCantidad(nuevaCantidad);
-        return repuestoRepository.save(repuesto);
-    }
 }

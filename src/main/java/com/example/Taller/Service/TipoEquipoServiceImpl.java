@@ -32,4 +32,13 @@ public class TipoEquipoServiceImpl implements TipoEquipoService {
             return "Tipo de equipo eliminado con éxito";
         }
     }
+
+    @Override
+    public TipoEquipoEntity actualizarTipoEquipo(int id, TipoEquipoEntity tipoEquipo) {
+        if (!tipoEquipoRepository.existsById(id)) {
+            throw new EntityNotFoundException("El tipo de equipo con id " + id + " no existe");
+        }
+        tipoEquipo.setId(id);
+        return tipoEquipoRepository.save(tipoEquipo);
+    }
 }

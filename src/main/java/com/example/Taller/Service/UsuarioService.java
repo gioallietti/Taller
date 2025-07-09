@@ -12,8 +12,11 @@ public interface UsuarioService {
 
     List<UsuarioEntity> obtenerTodosLosUsuarios();
 
-    String eliminarUsuario(String email);
+    String eliminarUsuario(int id);
 
     UsuarioEntity login(UsuarioEntity usuarioEntity) throws BadRequestException;
 
+    UsuarioEntity obtenerUsuarioPorId(int id);
+
+    UsuarioEntity actualizarUsuario(int id, UsuarioEntity usuario);
 }

@@ -1,9 +1,7 @@
 package com.example.Taller.Service;
 
 import com.example.Taller.Entity.EstadoEntity;
-import com.example.Taller.Entity.MarcaEntity;
 import com.example.Taller.Repository.EstadoRepository;
-import com.example.Taller.Repository.MarcaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +32,14 @@ public class EstadoServiceImpl implements EstadoService{
             this.estadoRepository.deleteById(id);
             return "Estado eliminado con éxito";
         }
+    }
+
+    @Override
+    public EstadoEntity actualizarEstado(int id, EstadoEntity estado) {
+        if (!estadoRepository.existsById(id)) {
+            throw new EntityNotFoundException("El estado con id " + id + " no existe");
+        }
+        estado.setId(id);
+        return estadoRepository.save(estado);
     }
 }

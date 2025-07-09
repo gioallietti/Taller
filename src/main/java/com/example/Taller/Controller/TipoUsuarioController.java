@@ -38,4 +38,9 @@ public class TipoUsuarioController {
         this.tipoUsuarioService.eliminarTipoUsuario(id);
         return ResponseEntity.ok("Tipo de usuario eliminado con éxito.");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TipoUsuarioEntity> actualizarTipoUsuario(@PathVariable int id, @RequestBody TipoUsuarioEntity tipoUsuario) {
+        return ResponseEntity.ok(tipoUsuarioService.actualizarTipoUsuario(id, tipoUsuario));
+    }
 }

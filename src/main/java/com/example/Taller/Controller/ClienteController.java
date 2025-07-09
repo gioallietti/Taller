@@ -34,4 +34,9 @@ public class ClienteController {
     public ResponseEntity<String> eliminarCliente(@PathVariable int id) {
         return ResponseEntity.ok(clienteService.eliminarCliente(id));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClienteEntity> actualizarCliente(@PathVariable int id, @RequestBody ClienteEntity cliente) {
+        return ResponseEntity.ok(clienteService.actualizarCliente(id, cliente));
+    }
 }

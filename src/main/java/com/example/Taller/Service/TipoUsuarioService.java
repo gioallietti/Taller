@@ -12,4 +12,6 @@ public interface TipoUsuarioService {
     List<TipoUsuarioEntity> obtenerTodosLosTipoUsuarios();
 
     String eliminarTipoUsuario(int id);
+
+    TipoUsuarioEntity actualizarTipoUsuario(int id, TipoUsuarioEntity tipoUsuario);
 }

@@ -18,5 +18,6 @@ public interface IngresoService {
 
     List<IngresoEntity> ingresosPorFechas(LocalDate desde, LocalDate hasta);
 
+    IngresoEntity actualizarIngreso(int id, IngresoEntity ingreso);
 }
 

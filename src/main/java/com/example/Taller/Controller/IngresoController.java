@@ -53,4 +53,9 @@ public class IngresoController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(ingresoService.ingresosPorFechas(fechaDesde, fechaHasta));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<IngresoEntity> actualizarIngreso(@PathVariable int id, @RequestBody IngresoEntity ingreso) {
+        return ResponseEntity.ok(ingresoService.actualizarIngreso(id, ingreso));
+    }
 }

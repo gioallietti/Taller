@@ -33,4 +33,13 @@ public class MarcaServiceImpl implements MarcaService{
             return "Marca eliminada con éxito";
         }
     }
+
+    @Override
+    public MarcaEntity actualizarMarca(int id, MarcaEntity marca) {
+        if (!marcaRepository.existsById(id)) {
+            throw new EntityNotFoundException("La marca con id " + id + " no existe");
+        }
+        marca.setId(id);
+        return marcaRepository.save(marca);
+    }
 }

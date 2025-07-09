@@ -2,7 +2,6 @@ package com.example.Taller.Controller;
 
 import com.example.Taller.Entity.TipoEquipoEntity;
 import com.example.Taller.Service.TipoEquipoService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +37,10 @@ public class TipoEquipoController {
     public ResponseEntity<String> eliminarTipoEquipo(@PathVariable int id) {
         this.tipoEquipoService.eliminarTipoEquipo(id);
         return ResponseEntity.ok("Tipo de equipo eliminado con éxito.");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TipoEquipoEntity> actualizarTipoEquipo(@PathVariable int id, @RequestBody TipoEquipoEntity tipoEquipo) {
+        return ResponseEntity.ok(tipoEquipoService.actualizarTipoEquipo(id, tipoEquipo));
     }
 }

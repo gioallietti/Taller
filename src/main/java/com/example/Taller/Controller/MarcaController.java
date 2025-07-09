@@ -38,4 +38,9 @@ public class MarcaController {
         this.marcaService.eliminarMarca(id);
         return ResponseEntity.ok("Marca eliminada con éxito.");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MarcaEntity> actualizarMarca(@PathVariable int id, @RequestBody MarcaEntity marca) {
+        return ResponseEntity.ok(marcaService.actualizarMarca(id, marca));
+    }
 }

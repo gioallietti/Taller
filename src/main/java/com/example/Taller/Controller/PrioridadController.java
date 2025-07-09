@@ -35,4 +35,9 @@ public class PrioridadController {
     public ResponseEntity<String> eliminarPrioridad(@PathVariable int id) {
         return ResponseEntity.ok(prioridadService.eliminarPrioridad(id));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PrioridadEntity> actualizarPrioridad(@PathVariable int id, @RequestBody PrioridadEntity prioridad) {
+        return ResponseEntity.ok(prioridadService.actualizarPrioridad(id, prioridad));
+    }
 }

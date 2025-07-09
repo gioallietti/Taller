@@ -44,4 +44,13 @@ public class EquipoServiceImpl implements EquipoService{
         TipoEquipoEntity tipoEquipo = this.tipoEquipoRepository.findById(tipoEquipoId).orElseThrow(() -> new EntityNotFoundException("Tipo de equipo no encontrado"));
         return this.equipoRepository.findByTipoEquipo(tipoEquipo);
     }
+
+    @Override
+    public EquipoEntity actualizarEquipo(int id, EquipoEntity equipo) {
+        if (!equipoRepository.existsById(id)) {
+            throw new EntityNotFoundException("El equipo con id " + id + " no existe");
+        }
+        equipo.setId(id);
+        return equipoRepository.save(equipo);
+    }
 }

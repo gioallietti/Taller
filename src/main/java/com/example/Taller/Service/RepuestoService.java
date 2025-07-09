@@ -12,6 +12,4 @@ public interface RepuestoService {
     List<RepuestoEntity> obtenerTodosLosRepuestos();
 
     String eliminarRepuesto(int id);
-
-    RepuestoEntity actualizarCantidadRepuesto(int id, int cantidad);
 }

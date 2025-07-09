@@ -15,6 +15,11 @@ public class PresupuestoServiceImpl implements PresupuestoService{
 
     @Override
     public PresupuestoEntity guardarPresupuesto(PresupuestoEntity presupuesto) {
+        double totalSinIva = presupuesto.getCostoRepuesto() + presupuesto.getManoDeObra();
+        presupuesto.setTotalSinIva(totalSinIva);
+        double totalConIva = presupuesto.getTotalSinIva() + (presupuesto.getTotalSinIva() * 0.22);
+        presupuesto.setTotalIva(totalConIva);
+
         return presupuestoRepository.save(presupuesto);
     }
 
@@ -36,5 +41,18 @@ public class PresupuestoServiceImpl implements PresupuestoService{
         }
         presupuestoRepository.deleteById(id);
         return "Presupuesto eliminado con éxito";
+    }
+
+    @Override
+    public PresupuestoEntity actualizarPresupuesto(int id, PresupuestoEntity presupuesto) {
+        if (!presupuestoRepository.existsById(id)) {
+            throw new EntityNotFoundException("El presupuesto con id " + id + " no existe");
+        }
+        double totalSinIva = presupuesto.getCostoRepuesto() + presupuesto.getManoDeObra();
+        presupuesto.setTotalSinIva(totalSinIva);
+        double totalConIva = presupuesto.getTotalSinIva() + (presupuesto.getTotalSinIva() * 0.22);
+        presupuesto.setTotalIva(totalConIva);
+        presupuesto.setId(id);
+        return presupuestoRepository.save(presupuesto);
     }
 }
