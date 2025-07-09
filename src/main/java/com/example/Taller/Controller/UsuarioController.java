@@ -22,8 +22,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<UsuarioEntity> obtenerUsuario(@PathVariable String email) {
-        return ResponseEntity.ok(usuarioService.obtenerUsuarioPorEmail(email));
+    public boolean obtenerUsuario(@PathVariable String email) {
+        return usuarioService.obtenerUsuarioPorEmail(email);
     }
 
     @GetMapping("/todos")
@@ -31,9 +31,9 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.obtenerTodosLosUsuarios());
     }
 
-    @DeleteMapping("/{email}")
-    public ResponseEntity<String> eliminarUsuario(@PathVariable String email) {
-        return ResponseEntity.ok(usuarioService.eliminarUsuario(email));
+    @DeleteMapping("/{id}")
+    public boolean eliminarUsuario(@PathVariable Integer id) {
+        return usuarioService.eliminarUsuario(id);
     }
 
     @PostMapping ("/login")

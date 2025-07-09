@@ -20,9 +20,9 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public UsuarioEntity obtenerUsuarioPorEmail(String email) {
-        return usuarioRepository.findById(email)
-                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con email: " + email));
+    public boolean obtenerUsuarioPorEmail(String email) {
+        return usuarioRepository.existsById(email);
+
     }
 
     @Override
@@ -31,12 +31,8 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public String eliminarUsuario(String email) {
-        if (!usuarioRepository.existsById(email)) {
-            throw new EntityNotFoundException("El usuario con email " + email + " no existe");
-        }
-        usuarioRepository.deleteById(email);
-        return "Usuario eliminado con éxito";
+    public boolean eliminarUsuario(Integer id) {
+        return usuarioRepository.deleteById(id);
     }
 
     public UsuarioEntity login(UsuarioEntity usuarioEntity) throws BadRequestException {
