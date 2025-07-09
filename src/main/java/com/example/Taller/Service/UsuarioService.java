@@ -12,11 +12,11 @@ public interface UsuarioService {
 
     List<UsuarioEntity> obtenerTodosLosUsuarios();
 
-    boolean eliminarUsuario(Integer id);
+    boolean eliminarUsuario(String id);
 
     UsuarioEntity login(UsuarioEntity usuarioEntity) throws BadRequestException;
 
-    UsuarioEntity obtenerUsuarioPorId(int id);
+    UsuarioEntity obtenerUsuarioPorId(String id);
 
-    UsuarioEntity actualizarUsuario(int id, UsuarioEntity usuario);
+    // UsuarioEntity actualizarUsuario(int id, UsuarioEntity usuario);
 }

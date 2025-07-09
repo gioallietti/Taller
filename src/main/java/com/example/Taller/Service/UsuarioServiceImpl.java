@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService{
+public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -21,8 +21,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public boolean obtenerUsuarioPorEmail(String email) {
-        return usuarioRepository.existsById(email);
-
+        return usuarioRepository.existsByEmail(email);
     }
 
     @Override
@@ -31,10 +30,21 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public boolean eliminarUsuario(Integer id) {
-        return usuarioRepository.deleteById(id);
+    public boolean eliminarUsuario(String id) {
+        if (usuarioRepository.existsById(id)) {
+            usuarioRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 
+    public UsuarioEntity obtenerUsuarioPorId(String id) {
+        return (UsuarioEntity) this.usuarioRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("Tipo de usuario encontrado con id: " + id));
+    }
+
+    @Override
     public UsuarioEntity login(UsuarioEntity usuarioEntity) throws BadRequestException {
         try {
             return usuarioRepository.findByEmailAndPassword(
@@ -42,7 +52,7 @@ public class UsuarioServiceImpl implements UsuarioService{
                     usuarioEntity.getPassword()
             );
         } catch (RuntimeException e) {
-            throw new BadRequestException("Mail o contraseña incorrectas");
+            throw new BadRequestException("Credenciales incorrectas");
         }
     }
 }

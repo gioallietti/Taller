@@ -32,7 +32,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public boolean eliminarUsuario(@PathVariable Integer id) {
+    public boolean eliminarUsuario(@PathVariable String id) {
         return usuarioService.eliminarUsuario(id);
     }
 
