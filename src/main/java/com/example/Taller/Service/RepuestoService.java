@@ -7,6 +7,8 @@ import java.util.List;
 public interface RepuestoService {
     RepuestoEntity guardarRepuesto(RepuestoEntity repuesto);
 
+    RepuestoEntity actualizarRepuesto(RepuestoEntity repuesto);
+
     RepuestoEntity obtenerRepuestoPorId(int id);
 
     List<RepuestoEntity> obtenerTodosLosRepuestos();

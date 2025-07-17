@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -18,6 +19,30 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioEntity guardarUsuario(UsuarioEntity usuario) {
         return usuarioRepository.save(usuario);
     }
+
+    @Override
+    public UsuarioEntity actualizarUsuario(UsuarioEntity usuario){
+        try {
+            String id = usuario.getId().toString();
+            UsuarioEntity usuarioExiste = this.obtenerUsuarioPorId(id);
+
+            if (usuarioExiste != null) {
+                usuarioExiste.setNombre(usuario.getNombre());
+                usuarioExiste.setApellido(usuario.getApellido());
+                usuarioExiste.setCedula(usuario.getCedula());
+                usuarioExiste.setTelefono(usuario.getTelefono());
+                usuarioExiste.setEmail(usuario.getEmail());
+                usuarioExiste.setTipoUsuario(usuario.getTipoUsuario());
+
+                return usuarioRepository.save(usuarioExiste);
+            } else {
+                return null;
+            }
+        } catch (RuntimeException e) {
+            return null;
+        }
+    }
+
 
     @Override
     public boolean obtenerUsuarioPorEmail(String email) {

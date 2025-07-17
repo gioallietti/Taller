@@ -4,9 +4,10 @@ import com.example.Taller.Entity.UsuarioEntity;
 import org.apache.coyote.BadRequestException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UsuarioService {
-    UsuarioEntity guardarUsuario(UsuarioEntity usuario);
+    UsuarioEntity guardarUsuario(UsuarioEntity usuario) throws BadRequestException;
 
     boolean obtenerUsuarioPorEmail(String email);
 
@@ -18,5 +19,5 @@ public interface UsuarioService {
 
     UsuarioEntity obtenerUsuarioPorId(String id);
 
-    // UsuarioEntity actualizarUsuario(int id, UsuarioEntity usuario);
+    UsuarioEntity actualizarUsuario(UsuarioEntity usuario);
 }

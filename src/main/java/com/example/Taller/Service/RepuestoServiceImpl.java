@@ -20,6 +20,15 @@ public class RepuestoServiceImpl implements RepuestoService{
     }
 
     @Override
+    public RepuestoEntity actualizarRepuesto(RepuestoEntity repuesto){
+        try {
+            return repuestoRepository.save(repuesto);
+        } catch (RuntimeException e) {
+            return null;
+        }
+    }
+
+    @Override
     public RepuestoEntity obtenerRepuestoPorId(int id) {
         return repuestoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Repuesto no encontrado con id: " + id));
