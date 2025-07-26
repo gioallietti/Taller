@@ -11,4 +11,8 @@ public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer>
 
     List<IngresoEntity> findByFechaIngresoBetween(LocalDate desde, LocalDate hasta);
 
+    List<IngresoEntity> findAllByRegistradoPor_Id(Integer registradoPorId);
+
+    List<IngresoEntity> findAllByEstado_IdAndReparadoPor_TipoUsuario_Id(Integer estadoId, Integer tipoUsuarioId);
+
 }

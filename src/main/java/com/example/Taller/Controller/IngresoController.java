@@ -39,19 +39,35 @@ public class IngresoController {
     }
 
     @GetMapping("/ordenPrioridad")
-    public ResponseEntity<List<IngresoEntity>> listarPorPrioridad(){
+    public ResponseEntity<List<IngresoEntity>> listarPorPrioridad() {
         return ResponseEntity.ok(ingresoService.listarPorPrioridad());
     }
 
     @GetMapping("/rangoFecha")
-    public ResponseEntity<?> buscarPorRangoFecha(@RequestParam String fechaInicio, @RequestParam String fechaFin){
+    public ResponseEntity<?> buscarPorRangoFecha(@RequestParam String fechaInicio, @RequestParam String fechaFin) {
         LocalDate fechaDesde = LocalDate.parse(fechaInicio);
         LocalDate fechaHasta = LocalDate.parse(fechaFin);
 
-        if (fechaDesde.isAfter(fechaHasta)){
+        if (fechaDesde.isAfter(fechaHasta)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La fecha de inicio no puede ser despues a la fecha de fin");
         }
         return ResponseEntity.status(HttpStatus.OK).body(ingresoService.ingresosPorFechas(fechaDesde, fechaHasta));
+    }
+
+    @GetMapping("/registradoPor/{id}")
+    public ResponseEntity<?> findAllByRegistradoPor_Id(@PathVariable Integer id) {
+        if (id != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(ingresoService.findAllByRegistradoPor_Id(id));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay ingresos por este usuarios");
+    }
+
+    @GetMapping("/reparados/{estadoId}/{tipoUsuarioId}")
+    public ResponseEntity<?> ingresoPorEstado_IdTipoUsuario(@PathVariable Integer estadoId,@PathVariable Integer tipoUsuarioId) {
+        if (estadoId != null && tipoUsuarioId != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(ingresoService.ingresoPorEstado_IdTipoUsuario(estadoId, tipoUsuarioId));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay ingresos");
     }
 
     @PutMapping("/{id}")

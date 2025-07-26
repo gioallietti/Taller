@@ -19,5 +19,10 @@ public interface IngresoService {
     List<IngresoEntity> ingresosPorFechas(LocalDate desde, LocalDate hasta);
 
     IngresoEntity actualizarIngreso(int id, IngresoEntity ingreso);
+
+    List<IngresoEntity> findAllByRegistradoPor_Id(Integer registradoPorId);
+
+    List<IngresoEntity> ingresoPorEstado_IdTipoUsuario(Integer estadoId, Integer tipoUsuarioId);
+
 }
 

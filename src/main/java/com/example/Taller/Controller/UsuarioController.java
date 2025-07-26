@@ -49,6 +49,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.obtenerTodosLosUsuarios());
     }
 
+    @GetMapping("/tecnicos/{id}")
+    public ResponseEntity<List<UsuarioEntity>> listarTecnicos(@PathVariable Integer id) {
+        return ResponseEntity.ok(usuarioService.obtenerTodosLosTecnicos(id));
+    }
+
     @DeleteMapping("/{id}")
     public boolean eliminarUsuario(@PathVariable String id) {
         return usuarioService.eliminarUsuario(id);
@@ -61,7 +66,7 @@ public class UsuarioController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontró usuario");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al  conectar con la base de datos");
         }
     }
 }

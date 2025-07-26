@@ -25,7 +25,7 @@ public class ClienteController {
         return ResponseEntity.ok(clienteService.obtenerClientePorId(id));
     }
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<ClienteEntity>> obtenerTodosLosClientes() {
         return ResponseEntity.ok(clienteService.obtenerTodosLosClientes());
     }

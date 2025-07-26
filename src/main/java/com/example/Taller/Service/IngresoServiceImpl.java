@@ -50,6 +50,16 @@ public class IngresoServiceImpl implements IngresoService{
     }
 
     @Override
+    public List<IngresoEntity> findAllByRegistradoPor_Id(Integer registradoPorId) {
+        return this.ingresoRepository.findAllByRegistradoPor_Id(registradoPorId);
+    }
+
+    @Override
+    public List<IngresoEntity> ingresoPorEstado_IdTipoUsuario(Integer estadoId, Integer tipoUsuarioId) {
+        return this.ingresoRepository.findAllByEstado_IdAndReparadoPor_TipoUsuario_Id(estadoId, tipoUsuarioId);
+    }
+
+    @Override
     public IngresoEntity actualizarIngreso(int id, IngresoEntity ingreso) {
         if (!ingresoRepository.existsById(id)) {
             throw new EntityNotFoundException("El ingreso con id " + id + " no existe");

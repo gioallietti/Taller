@@ -55,6 +55,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public List<UsuarioEntity> obtenerTodosLosTecnicos(Integer tipoUsuarioId) {
+        return usuarioRepository.findAllByTipoUsuario_Id(tipoUsuarioId);
+    }
+
+    @Override
     public boolean eliminarUsuario(String id) {
         if (usuarioRepository.existsById(id)) {
             usuarioRepository.deleteById(id);
