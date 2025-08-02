@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,14 +18,13 @@ public class IngresoEntity {
     private ClienteEntity cliente;
 
     @ManyToOne(optional = false)
-    private UsuarioEntity registradoPor;
+    private UsuarioEntity ingresadoPor;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private UsuarioEntity reparadoPor;
 
-    @ManyToMany
-    @JoinTable(name = "ingresoEquipo")
-    private List<EquipoEntity> equipos;
+    @ManyToOne(optional = false)
+    private EquipoEntity equipo;
 
     @Column(nullable = false)
     private String modelo;
@@ -51,16 +51,15 @@ public class IngresoEntity {
     @Column(nullable = false)
     private boolean presupuestado;
 
-    @ManyToMany
-    @JoinTable(name = "ingresoRepuesto")
-    private List<RepuestoEntity> repuestos;
+    @OneToMany(mappedBy = "ingreso", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<IngresoRepuestoEntity> ingresoRepuestos = new ArrayList<>();
 
-    public List<RepuestoEntity> getRepuestos() {
-        return repuestos;
+    public List<IngresoRepuestoEntity> getIngresoRepuestos() {
+        return ingresoRepuestos;
     }
 
-    public void setRepuestos(List<RepuestoEntity> repuestos) {
-        this.repuestos = repuestos;
+    public void setIngresoRepuestos(List<IngresoRepuestoEntity> ingresoRepuestos) {
+        this.ingresoRepuestos = ingresoRepuestos;
     }
 
     public Integer getId() {
@@ -79,22 +78,21 @@ public class IngresoEntity {
         this.cliente = cliente;
     }
 
-    public UsuarioEntity getRegistradoPor() { return registradoPor; }
+    public UsuarioEntity getIngresadoPor() { return ingresadoPor; }
 
-    public void setRegistradoPor(UsuarioEntity registradoPor) { this.registradoPor = registradoPor; }
+    public void setIngresadoPor(UsuarioEntity ingresadoPor) { this.ingresadoPor = ingresadoPor; }
 
     public UsuarioEntity getReparadoPor() { return reparadoPor; }
 
     public void setReparadoPor(UsuarioEntity reparadoPor) { this.reparadoPor = reparadoPor; }
 
-    public List<EquipoEntity> getEquipos() {
-        return equipos;
+    public EquipoEntity getEquipo() {
+        return equipo;
     }
 
-    public void setEquipos(List<EquipoEntity> equipos) {
-        this.equipos = equipos;
+    public void setEquipo(EquipoEntity equipo) {
+        this.equipo = equipo;
     }
-
     public String getModelo() {
         return modelo;
     }

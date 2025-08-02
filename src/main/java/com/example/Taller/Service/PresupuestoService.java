@@ -14,4 +14,11 @@ public interface PresupuestoService {
     String eliminarPresupuesto(int id);
 
     PresupuestoEntity actualizarPresupuesto(int id, PresupuestoEntity presupuesto);
+
+    PresupuestoEntity obtenerPresupuestoPorIngresoId(Integer ingresoId);
+
+    double calcularGanancia(PresupuestoEntity presupuesto);
+
+    double calcularGananciaMensual(int anio, int mes);
+
 }

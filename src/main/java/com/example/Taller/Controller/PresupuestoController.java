@@ -40,4 +40,21 @@ public class PresupuestoController {
     public ResponseEntity<PresupuestoEntity> actualizarPresupuesto(@PathVariable int id, @RequestBody PresupuestoEntity presupuesto) {
         return ResponseEntity.ok(presupuestoService.actualizarPresupuesto(id, presupuesto));
     }
+
+    @GetMapping("/ingreso/{id}")
+    public ResponseEntity<PresupuestoEntity> obtenerPresupuestoPorIngresoId(@PathVariable int id) {
+        return ResponseEntity.ok(presupuestoService.obtenerPresupuestoPorIngresoId(id));
+    }
+
+
+    @GetMapping("/{id}/ganancia")
+    public ResponseEntity<Double> obtenerGananciaPorPresupuesto(@PathVariable int id) {
+        PresupuestoEntity presupuesto = presupuestoService.obtenerPresupuestoPorId(id);
+        if (presupuesto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        double ganancia = presupuestoService.calcularGanancia(presupuesto);
+        return ResponseEntity.ok(ganancia);
+    }
 }
