@@ -13,6 +13,8 @@ public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer>
 
     List<IngresoEntity> findAllByIngresadoPor_Id(Integer registradoPorId);
 
+    List<IngresoEntity> findAllByReparadoPor_TipoUsuario_IdOrderByFechaFinalizacionDesc(Integer tipoUsuarioId);
+
     List<IngresoEntity> findAllByEstado_IdAndReparadoPor_TipoUsuario_Id(Integer estadoId, Integer tipoUsuarioId);
 
 }

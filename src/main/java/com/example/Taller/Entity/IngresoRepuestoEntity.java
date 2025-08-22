@@ -1,5 +1,6 @@
 package com.example.Taller.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +11,7 @@ public class IngresoRepuestoEntity {
     private Integer id;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "ingreso_id", nullable = false)
     private IngresoEntity ingreso;
 

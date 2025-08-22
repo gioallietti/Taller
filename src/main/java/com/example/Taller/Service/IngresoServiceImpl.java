@@ -3,9 +3,11 @@ package com.example.Taller.Service;
 import com.example.Taller.Entity.IngresoEntity;
 import com.example.Taller.Entity.IngresoRepuestoEntity;
 import com.example.Taller.Repository.IngresoRepository;
+import com.example.Taller.Repository.IngresoRepuestoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +16,9 @@ import java.util.List;
 public class IngresoServiceImpl implements IngresoService{
     @Autowired
     private IngresoRepository ingresoRepository;
+
+    @Autowired
+    private IngresoRepuestoRepository ingresoRepuestoRepository;
 
     @Override
     public IngresoEntity guardarIngreso(IngresoEntity ingreso) {
@@ -56,6 +61,11 @@ public class IngresoServiceImpl implements IngresoService{
     }
 
     @Override
+    public List<IngresoEntity> findAllByTecnicos(Integer id) {
+        return this.ingresoRepository.findAllByReparadoPor_TipoUsuario_IdOrderByFechaFinalizacionDesc(id);
+    }
+
+    @Override
     public List<IngresoEntity> ingresoPorEstado_IdTipoUsuario(Integer estadoId, Integer tipoUsuarioId) {
         return this.ingresoRepository.findAllByEstado_IdAndReparadoPor_TipoUsuario_Id(estadoId, tipoUsuarioId);
     }
@@ -78,15 +88,28 @@ public class IngresoServiceImpl implements IngresoService{
         ingresoExistente.setEstado(ingreso.getEstado());
         ingresoExistente.setDetalle(ingreso.getDetalle());
         ingresoExistente.setPresupuestado(ingreso.isPresupuestado());
+        ingresoExistente.setAvisoCliente(ingreso.getAvisoCliente());
+        ingresoExistente.setSolucion(ingreso.getSolucion());
 
         ingresoExistente.getIngresoRepuestos().clear();
-        if (ingreso.getIngresoRepuestos() != null) {
+        if (!CollectionUtils.isEmpty(ingreso.getIngresoRepuestos())) {
             for (IngresoRepuestoEntity ingresoRepuesto : ingreso.getIngresoRepuestos()) {
 
                 ingresoRepuesto.setIngreso(ingresoExistente);
-                ingresoExistente.getIngresoRepuestos().add(ingresoRepuesto);
+
+                ingresoRepuestoRepository.save(ingresoRepuesto);
             }
         }
+        return ingresoRepository.save(ingresoExistente);
+    }
+
+    @Override
+    public IngresoEntity actualizarIngresoEstado(int id, IngresoEntity ingreso) {
+        IngresoEntity ingresoExistente = ingresoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("El ingreso con id " + id + " no existe"));
+
+        ingresoExistente.setEstado(ingreso.getEstado());
+
         return ingresoRepository.save(ingresoExistente);
     }
 }

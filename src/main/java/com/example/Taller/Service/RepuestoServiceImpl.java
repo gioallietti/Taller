@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RepuestoServiceImpl implements RepuestoService{
@@ -46,5 +47,13 @@ public class RepuestoServiceImpl implements RepuestoService{
         }
         repuestoRepository.deleteById(id);
         return "Repuesto eliminado con éxito";
+    }
+
+    public void updateCantidadCopias(int id, int cantidad) {
+        Optional<RepuestoEntity> repuesto = repuestoRepository.findById(id);
+        if (repuesto.isPresent()) {
+            repuesto.get().setCantidad(repuesto.get().getCantidad() - cantidad);
+            repuestoRepository.save(repuesto.get());
+        }
     }
 }

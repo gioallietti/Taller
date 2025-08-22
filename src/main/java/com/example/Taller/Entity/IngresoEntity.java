@@ -1,5 +1,6 @@
 package com.example.Taller.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -48,9 +49,16 @@ public class IngresoEntity {
 
     private String detalle;
 
+    @Column(nullable = true)
+    private String solucion;
+
     @Column(nullable = false)
     private boolean presupuestado;
 
+    @Column(nullable = true)
+    private String avisoCliente;
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "ingreso", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<IngresoRepuestoEntity> ingresoRepuestos = new ArrayList<>();
 
@@ -78,13 +86,21 @@ public class IngresoEntity {
         this.cliente = cliente;
     }
 
-    public UsuarioEntity getIngresadoPor() { return ingresadoPor; }
+    public UsuarioEntity getIngresadoPor() {
+        return ingresadoPor;
+    }
 
-    public void setIngresadoPor(UsuarioEntity ingresadoPor) { this.ingresadoPor = ingresadoPor; }
+    public void setIngresadoPor(UsuarioEntity ingresadoPor) {
+        this.ingresadoPor = ingresadoPor;
+    }
 
-    public UsuarioEntity getReparadoPor() { return reparadoPor; }
+    public UsuarioEntity getReparadoPor() {
+        return reparadoPor;
+    }
 
-    public void setReparadoPor(UsuarioEntity reparadoPor) { this.reparadoPor = reparadoPor; }
+    public void setReparadoPor(UsuarioEntity reparadoPor) {
+        this.reparadoPor = reparadoPor;
+    }
 
     public EquipoEntity getEquipo() {
         return equipo;
@@ -93,6 +109,7 @@ public class IngresoEntity {
     public void setEquipo(EquipoEntity equipo) {
         this.equipo = equipo;
     }
+
     public String getModelo() {
         return modelo;
     }
@@ -163,5 +180,21 @@ public class IngresoEntity {
 
     public void setPresupuestado(boolean presupuestado) {
         this.presupuestado = presupuestado;
+    }
+
+    public String getAvisoCliente() {
+        return avisoCliente;
+    }
+
+    public void setAvisoCliente(String avisoCliente) {
+        this.avisoCliente = avisoCliente;
+    }
+
+    public String getSolucion() {
+        return solucion;
+    }
+
+    public void setSolucion(String solucion) {
+        this.solucion = solucion;
     }
 }
