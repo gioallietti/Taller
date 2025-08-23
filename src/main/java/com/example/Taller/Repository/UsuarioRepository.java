@@ -1,6 +1,5 @@
 package com.example.Taller.Repository;
 
-import com.example.Taller.Entity.IngresoEntity;
 import com.example.Taller.Entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
