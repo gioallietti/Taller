@@ -22,6 +22,8 @@ public interface IngresoService {
 
     IngresoEntity actualizarIngresoEstado(int id, IngresoEntity ingreso);
 
+    IngresoEntity guardarMensaje(int id, IngresoEntity ingreso);
+
     List<IngresoEntity> findAllByRegistradoPor_Id(Integer registradoPorId);
 
     List<IngresoEntity> findAllByTecnicos(Integer registradoPorId);

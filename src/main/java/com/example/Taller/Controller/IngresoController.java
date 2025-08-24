@@ -126,6 +126,11 @@ public class IngresoController {
         return ResponseEntity.ok(ingresoService.actualizarIngreso(id, ingreso));
     }
 
+    @PutMapping("/guardarMensaje/{id}")
+    public ResponseEntity<IngresoEntity> guardarMensaje(@PathVariable int id, @RequestBody IngresoEntity ingreso) {
+        return ResponseEntity.ok(ingresoService.guardarMensaje(id, ingreso));
+    }
+
     @PutMapping("/estado/{id}")
     public ResponseEntity<IngresoEntity> actualizarIngresoEstado(@PathVariable int id, @RequestBody IngresoEntity ingreso) {
 

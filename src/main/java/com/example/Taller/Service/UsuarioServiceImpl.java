@@ -85,15 +85,4 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new BadRequestException("Credenciales incorrectas");
         }
     }
-
-    public UsuarioEntity login(UsuarioEntity usuarioEntity) throws BadRequestException {
-        try {
-            return usuarioRepository.findByEmailAndPassword(
-                    usuarioEntity.getEmail(),
-                    usuarioEntity.getPassword()
-            );
-        } catch (RuntimeException e) {
-            throw new BadRequestException("Credenciales incorrectas");
-        }
-    }
 }

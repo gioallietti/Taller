@@ -88,7 +88,6 @@ public class IngresoServiceImpl implements IngresoService{
         ingresoExistente.setEstado(ingreso.getEstado());
         ingresoExistente.setDetalle(ingreso.getDetalle());
         ingresoExistente.setPresupuestado(ingreso.isPresupuestado());
-        ingresoExistente.setAvisoCliente(ingreso.getAvisoCliente());
         ingresoExistente.setSolucion(ingreso.getSolucion());
 
         ingresoExistente.getIngresoRepuestos().clear();
@@ -100,6 +99,15 @@ public class IngresoServiceImpl implements IngresoService{
                 ingresoRepuestoRepository.save(ingresoRepuesto);
             }
         }
+        return ingresoRepository.save(ingresoExistente);
+    }
+
+    @Override
+    public IngresoEntity guardarMensaje(int id, IngresoEntity ingreso) {
+        IngresoEntity ingresoExistente = ingresoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("El ingreso con id " + id + " no existe"));
+
+        ingresoExistente.setAvisoCliente(ingreso.getAvisoCliente());
         return ingresoRepository.save(ingresoExistente);
     }
 
