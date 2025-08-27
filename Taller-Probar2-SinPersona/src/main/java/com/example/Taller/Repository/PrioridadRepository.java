@@ -4,4 +4,7 @@ import com.example.Taller.Entity.PrioridadEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PrioridadRepository extends JpaRepository<PrioridadEntity, Integer> {
+    PrioridadEntity findByNombre(String nombre);
+
+    PrioridadEntity findByNivel(Integer nivel);
 }

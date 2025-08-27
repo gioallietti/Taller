@@ -15,6 +15,15 @@ public class PrioridadServiceImpl implements PrioridadService{
 
     @Override
     public PrioridadEntity guardarPrioridad(PrioridadEntity prioridad) {
+
+        if (prioridadRepository.findByNombre(prioridad.getNombre()) != null){
+            throw new IllegalArgumentException("La prioridad con ese nombre ya existe");
+        }
+
+        if (prioridadRepository.findByNivel(prioridad.getNivel()) != null){
+            throw new IllegalArgumentException("Ya hay una prioridad que tiene ese nivel");
+        }
+
         return prioridadRepository.save(prioridad);
     }
 

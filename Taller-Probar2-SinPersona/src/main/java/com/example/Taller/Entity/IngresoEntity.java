@@ -19,7 +19,7 @@ public class IngresoEntity {
     @ManyToOne(optional = false)
     private UsuarioEntity ingresadoPor;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private UsuarioEntity reparadoPor;
 
     @ManyToOne(optional = false)

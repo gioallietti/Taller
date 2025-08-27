@@ -13,6 +13,11 @@ public class TipoEquipoServiceImpl implements TipoEquipoService {
     private TipoEquipoRepository tipoEquipoRepository;
 
     public TipoEquipoEntity guardarTipoEquipo(TipoEquipoEntity tipoEquipo) {
+
+        if (tipoEquipoRepository.findByNombre(tipoEquipo.getNombre()) != null){
+            throw new IllegalArgumentException("Ese tipo de equipo ya existe");
+        }
+
         return (TipoEquipoEntity) this.tipoEquipoRepository.save(tipoEquipo);
     }
 

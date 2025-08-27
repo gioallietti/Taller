@@ -57,7 +57,7 @@ public class IngresoController {
     @GetMapping("/registradoPor/{id}")
     public ResponseEntity<?> findAllByRegistradoPor_Id(@PathVariable Integer id) {
         if (id != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(ingresoService.findAllByRegistradoPor_Id(id));
+            return ResponseEntity.status(HttpStatus.OK).body(ingresoService.findAllByIngresadoPor_Id(id));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay ingresos por este usuarios");
     }

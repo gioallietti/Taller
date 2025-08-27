@@ -20,7 +20,7 @@ public interface IngresoService {
 
     IngresoEntity actualizarIngreso(int id, IngresoEntity ingreso);
 
-    List<IngresoEntity> findAllByRegistradoPor_Id(Integer registradoPorId);
+    List<IngresoEntity> findAllByIngresadoPor_Id(Integer ingresadoPorId);
 
     List<IngresoEntity> ingresoPorEstado_IdTipoUsuario(Integer estadoId, Integer tipoUsuarioId);
 

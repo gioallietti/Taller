@@ -16,6 +16,11 @@ public class IngresoServiceImpl implements IngresoService{
 
     @Override
     public IngresoEntity guardarIngreso(IngresoEntity ingreso) {
+
+        if (ingreso.getModelo().length() > 30){
+            throw new IllegalArgumentException("Nombre de modelo demasiado largo");
+        }
+
         return ingresoRepository.save(ingreso);
     }
 
@@ -50,8 +55,8 @@ public class IngresoServiceImpl implements IngresoService{
     }
 
     @Override
-    public List<IngresoEntity> findAllByRegistradoPor_Id(Integer registradoPorId) {
-        return this.ingresoRepository.findAllByRegistradoPor_Id(registradoPorId);
+    public List<IngresoEntity> findAllByIngresadoPor_Id(Integer registradoPorId) {
+        return this.ingresoRepository.findAllByIngresadoPor_Id(registradoPorId);
     }
 
     @Override
