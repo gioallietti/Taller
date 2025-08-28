@@ -30,5 +30,12 @@ public interface IngresoService {
 
     List<IngresoEntity> ingresoPorEstado_IdTipoUsuario(Integer estadoId, Integer tipoUsuarioId);
 
+    List<IngresoEntity> IngresosFinalizadosMasTresMeses();
+
+    List<IngresoEntity> listarIngresosNoFinalizados();
+
+    List<IngresoEntity> listarIngresosFinalizados();
+
+
 }
 

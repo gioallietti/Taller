@@ -17,4 +17,10 @@ public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer>
 
     List<IngresoEntity> findAllByEstado_IdAndReparadoPor_TipoUsuario_Id(Integer estadoId, Integer tipoUsuarioId);
 
+    List<IngresoEntity> findByEstadoIdNot(Integer estadoId);
+
+    List<IngresoEntity> findByEstadoId(Integer estadoId);
+
+    List<IngresoEntity> findByFechaFinalizacionBefore(LocalDate fechaMaxima);
+
 }

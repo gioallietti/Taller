@@ -22,6 +22,11 @@ public class IngresoServiceImpl implements IngresoService{
 
     @Override
     public IngresoEntity guardarIngreso(IngresoEntity ingreso) {
+
+        if (ingreso.getModelo().length() > 30){
+            throw new IllegalArgumentException("Nombre de modelo demasiado largo");
+        }
+
         return ingresoRepository.save(ingreso);
     }
 
@@ -119,5 +124,21 @@ public class IngresoServiceImpl implements IngresoService{
         ingresoExistente.setEstado(ingreso.getEstado());
 
         return ingresoRepository.save(ingresoExistente);
+    }
+
+    @Override
+    public List<IngresoEntity> IngresosFinalizadosMasTresMeses() {
+        LocalDate fechaMaxima = LocalDate.now().minusMonths(3);
+        return ingresoRepository.findByFechaFinalizacionBefore(fechaMaxima);
+    }
+
+    @Override
+    public List<IngresoEntity> listarIngresosNoFinalizados() {
+        return ingresoRepository.findByEstadoIdNot(5);
+    }
+
+    @Override
+    public List<IngresoEntity> listarIngresosFinalizados() {
+        return ingresoRepository.findByEstadoId(5) ;
     }
 }

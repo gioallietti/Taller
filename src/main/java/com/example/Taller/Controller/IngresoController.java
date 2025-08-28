@@ -136,4 +136,21 @@ public class IngresoController {
 
         return ResponseEntity.ok(ingresoService.actualizarIngresoEstado(id, ingreso));
     }
+
+    @GetMapping("/finalizadosTresMeses")
+    public ResponseEntity<List<IngresoEntity>> listarIngresosFinalizadosAntiguos() {
+        List<IngresoEntity> ingresos = ingresoService.IngresosFinalizadosMasTresMeses();
+        return ResponseEntity.ok(ingresos);
+    }
+
+    @GetMapping("/noFinalizados")
+    public ResponseEntity<List<IngresoEntity>> listarNoFinalizados() {
+        return ResponseEntity.ok(ingresoService.listarIngresosNoFinalizados());
+    }
+
+    @GetMapping("/finalizados")
+    public ResponseEntity<List<IngresoEntity>> listarFinalizados() {
+        return ResponseEntity.ok(ingresoService.listarIngresosFinalizados());
+    }
+
 }

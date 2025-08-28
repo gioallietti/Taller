@@ -33,7 +33,7 @@ public class EquipoController {
         return ResponseEntity.ok(equipoService.obtenerEquipoPorId(id));
     }
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<EquipoEntity>> obtenerTodosLosEquipos() {
         return ResponseEntity.ok(equipoService.obtenerTodosLosEquipos());
     }
