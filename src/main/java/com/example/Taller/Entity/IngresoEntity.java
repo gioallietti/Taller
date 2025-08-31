@@ -27,9 +27,6 @@ public class IngresoEntity {
     @ManyToOne(optional = false)
     private EquipoEntity equipo;
 
-    @Column(nullable = false)
-    private String modelo;
-
     @Column(name = "numeroSerie", nullable = false, unique = true)
     private String numeroSerie;
 
@@ -108,14 +105,6 @@ public class IngresoEntity {
 
     public void setEquipo(EquipoEntity equipo) {
         this.equipo = equipo;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
     }
 
     public String getNumeroSerie() {

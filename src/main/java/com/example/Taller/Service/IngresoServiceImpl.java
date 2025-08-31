@@ -23,10 +23,6 @@ public class IngresoServiceImpl implements IngresoService{
     @Override
     public IngresoEntity guardarIngreso(IngresoEntity ingreso) {
 
-        if (ingreso.getModelo().length() > 30){
-            throw new IllegalArgumentException("Nombre de modelo demasiado largo");
-        }
-
         if (ingresoRepository.findByNumeroSerie(ingreso.getNumeroSerie()) != null){
             throw new IllegalArgumentException("Ya se ha ingresado un equipo con ese numero de serie");
         }
@@ -88,7 +84,6 @@ public class IngresoServiceImpl implements IngresoService{
         ingresoExistente.setIngresadoPor(ingreso.getIngresadoPor());
         ingresoExistente.setReparadoPor(ingreso.getReparadoPor());
         ingresoExistente.setEquipo(ingreso.getEquipo());
-        ingresoExistente.setModelo(ingreso.getModelo());
         ingresoExistente.setNumeroSerie(ingreso.getNumeroSerie());
         ingresoExistente.setProblema(ingreso.getProblema());
         ingresoExistente.setPrioridad(ingreso.getPrioridad());
