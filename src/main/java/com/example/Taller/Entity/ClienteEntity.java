@@ -15,6 +15,9 @@ public class ClienteEntity extends PersonaEntity{
     @Column(nullable = false)
     private String pais;
 
+    @Column(nullable = true)
+    private String telefono2;
+
     public String getDireccion() {
         return direccion;
     }
