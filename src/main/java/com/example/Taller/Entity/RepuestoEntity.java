@@ -32,6 +32,9 @@ public class RepuestoEntity {
     @Column(nullable = false)
     private LocalDate fecha;
 
+    @Column(nullable = false)
+    private int stockMinimo;
+
     public Integer getId() {
         return id;
     }
@@ -90,5 +93,13 @@ public class RepuestoEntity {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public int getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(int stockMinimo) {
+        this.stockMinimo = stockMinimo;
     }
 }
