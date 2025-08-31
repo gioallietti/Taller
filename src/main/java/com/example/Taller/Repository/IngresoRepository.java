@@ -23,4 +23,5 @@ public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer>
 
     List<IngresoEntity> findByFechaFinalizacionBefore(LocalDate fechaMaxima);
 
+    IngresoEntity findByNumeroSerie(String numeroSerie);
 }

@@ -27,6 +27,10 @@ public class IngresoServiceImpl implements IngresoService{
             throw new IllegalArgumentException("Nombre de modelo demasiado largo");
         }
 
+        if (ingresoRepository.findByNumeroSerie(ingreso.getNumeroSerie()) != null){
+            throw new IllegalArgumentException("Ya se ha ingresado un equipo con ese numero de serie");
+        }
+
         return ingresoRepository.save(ingreso);
     }
 

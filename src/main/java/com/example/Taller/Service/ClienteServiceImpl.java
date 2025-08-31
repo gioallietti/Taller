@@ -31,10 +31,11 @@ public class ClienteServiceImpl implements ClienteService{
             throw new IllegalArgumentException("Solo se pueden poner numeros y el simbolo +");
         }
 
-        if (clienteRepository.findByCedula(cliente.getCedula()) != null){
-            throw new IllegalArgumentException("La cedula/RUT ya existe");
+        ClienteEntity clienteExistente = clienteRepository.findByCedula(cliente.getCedula());
+        if (clienteExistente != null) {
+            String nombreCompleto = clienteExistente.getNombre() + " " + clienteExistente.getApellido();
+            throw new IllegalArgumentException("La cédula/RUT ya existe y es: " + nombreCompleto);
         }
-
 
         return clienteRepository.save(cliente);
     }

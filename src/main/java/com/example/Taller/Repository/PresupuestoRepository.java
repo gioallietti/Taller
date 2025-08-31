@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface PresupuestoRepository extends JpaRepository<PresupuestoEntity, Integer> {
 
-    Optional<PresupuestoEntity> findByIngreso_Id(Integer ingresoId);
+    PresupuestoEntity findByIngreso_Id(Integer ingresoId);
 }

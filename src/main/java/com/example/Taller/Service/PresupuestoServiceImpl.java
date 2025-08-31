@@ -22,6 +22,11 @@ public class PresupuestoServiceImpl implements PresupuestoService{
 
     @Override
     public PresupuestoEntity guardarPresupuesto(PresupuestoEntity presupuesto) {
+
+        if(presupuestoRepository.findByIngreso_Id(presupuesto.getIngreso().getId()) != null){
+            throw new IllegalArgumentException("Ya existe un presupuesto para ese ingreso");
+        }
+
         double totalSinIva = presupuesto.getCostoRepuesto() + presupuesto.getManoDeObra();
         presupuesto.setTotalSinIva(totalSinIva);
         double totalConIva = presupuesto.getTotalSinIva() + (presupuesto.getTotalSinIva() * 0.22);
@@ -38,8 +43,13 @@ public class PresupuestoServiceImpl implements PresupuestoService{
 
     @Override
     public PresupuestoEntity obtenerPresupuestoPorIngresoId(Integer ingresoId) {
-        return presupuestoRepository.findByIngreso_Id(ingresoId)
-                .orElseThrow(() -> new EntityNotFoundException("Presupuesto no encontrado para el ingreso con id: " + ingresoId));
+        PresupuestoEntity presupuesto = presupuestoRepository.findByIngreso_Id(ingresoId);
+
+        if (presupuesto == null) {
+            throw new EntityNotFoundException("Presupuesto no encontrado para el ingreso con id: " + ingresoId);
+        }
+
+        return presupuesto;
     }
 
     @Override
