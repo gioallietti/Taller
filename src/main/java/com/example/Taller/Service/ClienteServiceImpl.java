@@ -31,6 +31,14 @@ public class ClienteServiceImpl implements ClienteService{
             throw new IllegalArgumentException("Solo se pueden poner numeros y el simbolo +");
         }
 
+        if (!cliente.getTelefono2().matches("^\\+?[0-9]+$")){
+            throw new IllegalArgumentException("Solo se pueden poner numeros y el simbolo + el segundo telefono");
+        }
+
+        if (cliente.getTelefono2().length() < 6 || cliente.getTelefono2().length() > 15){
+            throw new IllegalArgumentException("Solo puede tener entre 6 y 15 numeros el segundo telefono.");
+        }
+
         ClienteEntity clienteExistente = clienteRepository.findByCedula(cliente.getCedula());
         if (clienteExistente != null) {
             String nombreCompleto = clienteExistente.getNombre() + " " + clienteExistente.getApellido();

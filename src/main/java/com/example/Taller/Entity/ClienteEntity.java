@@ -18,6 +18,14 @@ public class ClienteEntity extends PersonaEntity{
     @Column(nullable = true)
     private String telefono2;
 
+    public String getTelefono2() {
+        return telefono2;
+    }
+
+    public void setTelefono2(String telefono2) {
+        this.telefono2 = telefono2;
+    }
+
     public String getDireccion() {
         return direccion;
     }
