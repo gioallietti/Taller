@@ -13,6 +13,17 @@ public class MarcaEntity {
     @Column(nullable = false, unique = true)
     private String nombre;
 
+    @Column(nullable = false)
+    private Boolean activo = true;
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -14,6 +14,17 @@ public class UsuarioEntity extends PersonaEntity {
     @ManyToOne(optional = false)
     private TipoUsuarioEntity tipoUsuario;
 
+    @Column(nullable = false)
+    private Boolean activo = true;
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
     public String getEmail() {
         return email;
     }

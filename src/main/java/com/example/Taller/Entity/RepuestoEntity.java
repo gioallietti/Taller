@@ -35,6 +35,17 @@ public class RepuestoEntity {
     @Column(nullable = false)
     private int stockMinimo;
 
+    @Column(nullable = false)
+    private Boolean activo = true;
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
     public Integer getId() {
         return id;
     }

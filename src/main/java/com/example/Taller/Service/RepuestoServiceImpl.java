@@ -1,5 +1,6 @@
 package com.example.Taller.Service;
 
+import com.example.Taller.Entity.MarcaEntity;
 import com.example.Taller.Entity.RepuestoEntity;
 import com.example.Taller.Repository.RepuestoRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -42,16 +43,15 @@ public class RepuestoServiceImpl implements RepuestoService{
 
     @Override
     public List<RepuestoEntity> obtenerTodosLosRepuestos() {
-        return repuestoRepository.findAll();
+        return repuestoRepository.findAllByActivoTrue();
     }
 
-    @Override
     public String eliminarRepuesto(int id) {
-        if (!repuestoRepository.existsById(id)) {
-            throw new EntityNotFoundException("El repuesto con id " + id + " no existe");
-        }
-        repuestoRepository.deleteById(id);
-        return "Repuesto eliminado con éxito";
+        RepuestoEntity repuesto = this.repuestoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("El reupuesto con id " + id + " no existe"));
+        repuesto.setActivo(false);
+        this.repuestoRepository.save(repuesto);
+        return "Repuesto eliminado lógicamente con éxito";
     }
 
     public void updateCantidadCopias(int id, int cantidad) {

@@ -1,5 +1,6 @@
 package com.example.Taller.Repository;
 
+import com.example.Taller.Entity.MarcaEntity;
 import com.example.Taller.Entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,4 +12,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, String> 
     boolean existsByEmail(String email);
 
     List<UsuarioEntity> findAllByTipoUsuario_Id(Integer tipoUsuarioId);
+
+    List<UsuarioEntity> findAllByActivoTrue();
+
 }

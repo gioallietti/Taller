@@ -51,7 +51,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public List<UsuarioEntity> obtenerTodosLosUsuarios() {
-        return usuarioRepository.findAll();
+        return usuarioRepository.findAllByActivoTrue();
     }
 
     @Override
@@ -61,12 +61,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public boolean eliminarUsuario(String id) {
-        if (usuarioRepository.existsById(id)) {
-            usuarioRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
+        UsuarioEntity usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("El usuario con id " + id + " no existe"));
+        usuario.setActivo(false);
+        usuarioRepository.save(usuario);
+        return true;
     }
 
     public UsuarioEntity obtenerUsuarioPorId(String id) {

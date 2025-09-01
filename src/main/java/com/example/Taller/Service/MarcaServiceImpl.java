@@ -30,17 +30,17 @@ public class MarcaServiceImpl implements MarcaService{
     }
 
     public List<MarcaEntity> obtenerTodasLasMarcas() {
-        return this.marcaRepository.findAll();
+        return this.marcaRepository.findAllByActivoTrue();
     }
 
     public String eliminarMarca(int id) {
-        if (!this.marcaRepository.existsById(id)) {
-            throw new EntityNotFoundException("La marca con id " + id + " no existe");
-        } else {
-            this.marcaRepository.deleteById(id);
-            return "Marca eliminada con éxito";
-        }
+        MarcaEntity marca = this.marcaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("La marca con id " + id + " no existe"));
+        marca.setActivo(false);
+        this.marcaRepository.save(marca);
+        return "Marca eliminada lógicamente con éxito";
     }
+
 
     @Override
     public MarcaEntity actualizarMarca(int id, MarcaEntity marca) {
