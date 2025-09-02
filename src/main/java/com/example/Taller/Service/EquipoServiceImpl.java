@@ -1,6 +1,7 @@
 package com.example.Taller.Service;
 
 import com.example.Taller.Entity.EquipoEntity;
+import com.example.Taller.Entity.MarcaEntity;
 import com.example.Taller.Entity.TipoEquipoEntity;
 import com.example.Taller.Repository.EquipoRepository;
 import com.example.Taller.Repository.TipoEquipoRepository;
@@ -27,16 +28,15 @@ public class EquipoServiceImpl implements EquipoService{
     }
 
     public List<EquipoEntity> obtenerTodosLosEquipos() {
-        return this.equipoRepository.findAll();
+        return this.equipoRepository.findAllByActivoTrue();
     }
 
     public String eliminarEquipo(int id) {
-        if (!this.equipoRepository.existsById(id)) {
-            throw new EntityNotFoundException("El equipo con id " + id + " no existe");
-        } else {
-            this.equipoRepository.deleteById(id);
-            return "Equipo eliminada con éxito";
-        }
+        EquipoEntity equipo = this.equipoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("El equipo con id " + id + " no existe"));
+        equipo.setActivo(false);
+        this.equipoRepository.save(equipo);
+        return "Equipo eliminado lógicamente con éxito";
     }
 
     @Override

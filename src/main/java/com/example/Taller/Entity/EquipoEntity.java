@@ -18,6 +18,17 @@ public class EquipoEntity {
     @Column(name = "modelo", nullable = false)
     private String modelo;
 
+    @Column(nullable = false)
+    private Boolean activo = true;
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
     public Integer getId() {
         return id;
     }
