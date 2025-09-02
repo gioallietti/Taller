@@ -1,6 +1,7 @@
 package com.example.Taller.Service;
 
 import com.example.Taller.Entity.ClienteEntity;
+import com.example.Taller.Entity.MarcaEntity;
 import com.example.Taller.Repository.ClienteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,16 +58,16 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Override
     public List<ClienteEntity> obtenerTodosLosClientes() {
-        return clienteRepository.findAll();
+        return clienteRepository.findAllByActivoTrue();
     }
 
-    @Override
+
     public String eliminarCliente(int id) {
-        if (!clienteRepository.existsById(id)) {
-            throw new EntityNotFoundException("El cliente con id " + id + " no existe");
-        }
-        clienteRepository.deleteById(id);
-        return "Cliente eliminado correctamente";
+        ClienteEntity cliente = this.clienteRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("El cliente con id " + id + " no existe"));
+        cliente.setActivo(false);
+        this.clienteRepository.save(cliente);
+        return "Cliente eliminado lógicamente con éxito";
     }
 
     @Override

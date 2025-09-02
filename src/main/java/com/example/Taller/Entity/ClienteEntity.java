@@ -22,6 +22,17 @@ public class ClienteEntity extends PersonaEntity{
         return telefono2;
     }
 
+    @Column(nullable = false)
+    private Boolean activo = true;
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
     public void setTelefono2(String telefono2) {
         this.telefono2 = telefono2;
     }
