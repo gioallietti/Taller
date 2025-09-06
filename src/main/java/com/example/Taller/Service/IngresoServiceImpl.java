@@ -1,5 +1,6 @@
 package com.example.Taller.Service;
 
+import com.example.Taller.DTO.IngreosPorMesAnioDTO;
 import com.example.Taller.Entity.IngresoEntity;
 import com.example.Taller.Entity.IngresoRepuestoEntity;
 import com.example.Taller.Repository.IngresoRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -123,6 +125,40 @@ public class IngresoServiceImpl implements IngresoService{
         ingresoExistente.setEstado(ingreso.getEstado());
 
         return ingresoRepository.save(ingresoExistente);
+    }
+
+    @Override
+    public List<IngreosPorMesAnioDTO>  obtenerIngresosPorAnio() {
+        List<Object[]> ingreosPorMesAnioObjeto = ingresoRepository.obtenerIngresosPorAnio();
+
+        List<IngreosPorMesAnioDTO> ingreosPorMesAnioDTOList = new ArrayList<>();
+
+        for (Object[] fila : ingreosPorMesAnioObjeto) {
+            IngreosPorMesAnioDTO dto = new IngreosPorMesAnioDTO();
+
+            dto.setMesAnio(((String) fila[0].toString()));
+            dto.setCantidad(((Number) fila[1]).intValue());
+
+            ingreosPorMesAnioDTOList.add(dto);
+        }
+        return ingreosPorMesAnioDTOList;
+    }
+
+    @Override
+    public List<IngreosPorMesAnioDTO>  obtenerIngresosPorMes() {
+        List<Object[]> ingreosPorMesAnioObjeto = ingresoRepository.obtenerIngresosPorMes();
+
+        List<IngreosPorMesAnioDTO> ingreosPorMesAnioDTOList = new ArrayList<>();
+
+        for (Object[] fila : ingreosPorMesAnioObjeto) {
+            IngreosPorMesAnioDTO dto = new IngreosPorMesAnioDTO();
+
+            dto.setMesAnio(((String) fila[0].toString()));
+            dto.setCantidad(((Number) fila[1]).intValue());
+
+            ingreosPorMesAnioDTOList.add(dto);
+        }
+        return ingreosPorMesAnioDTOList;
     }
 
     @Override

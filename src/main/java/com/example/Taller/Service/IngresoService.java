@@ -1,5 +1,6 @@
 package com.example.Taller.Service;
 
+import com.example.Taller.DTO.IngreosPorMesAnioDTO;
 import com.example.Taller.Entity.IngresoEntity;
 
 import java.time.LocalDate;
@@ -36,6 +37,8 @@ public interface IngresoService {
 
     List<IngresoEntity> listarIngresosFinalizados();
 
+    List<IngreosPorMesAnioDTO> obtenerIngresosPorAnio();
 
+    List<IngreosPorMesAnioDTO> obtenerIngresosPorMes();
 }
 

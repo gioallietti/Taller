@@ -1,7 +1,9 @@
 package com.example.Taller.Repository;
 
+import com.example.Taller.DTO.IngreosPorMesAnioDTO;
 import com.example.Taller.Entity.IngresoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,4 +26,16 @@ public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer>
     List<IngresoEntity> findByFechaFinalizacionBefore(LocalDate fechaMaxima);
 
     IngresoEntity findByNumeroSerie(String numeroSerie);
+
+    @Query (value = "SELECT year(fecha_ingreso) as anio, COUNT(*) as cantidad \n" +
+            "FROM taller4.ingresos \n" +
+            "GROUP BY year(fecha_ingreso) \n" +
+            "order by year(fecha_ingreso) desc", nativeQuery = true)
+    List<Object[]>  obtenerIngresosPorAnio();
+
+    @Query (value = "SELECT DATE_FORMAT(fecha_ingreso, '%m-%Y') as mes,  COUNT(*) as cantidad \n" +
+            "FROM taller4.ingresos \n" +
+            "GROUP BY mes \n" +
+            "order by mes desc", nativeQuery = true)
+    List<Object[]>  obtenerIngresosPorMes();
 }
