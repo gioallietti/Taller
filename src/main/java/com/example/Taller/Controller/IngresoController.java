@@ -1,5 +1,6 @@
 package com.example.Taller.Controller;
 
+import com.example.Taller.DTO.IngreosPorMesAnioDTO;
 import com.example.Taller.Entity.IngresoEntity;
 import com.example.Taller.Entity.IngresoRepuestoEntity;
 import com.example.Taller.Entity.RepuestoEntity;
@@ -135,6 +136,18 @@ public class IngresoController {
     public ResponseEntity<IngresoEntity> actualizarIngresoEstado(@PathVariable int id, @RequestBody IngresoEntity ingreso) {
 
         return ResponseEntity.ok(ingresoService.actualizarIngresoEstado(id, ingreso));
+    }
+
+    @GetMapping("/ingresosPorAnio")
+    public ResponseEntity<List<IngreosPorMesAnioDTO> > obtenerIngresosPorAnio() {
+
+        return ResponseEntity.ok(ingresoService.obtenerIngresosPorAnio());
+    }
+
+    @GetMapping("/ingresosPorMes")
+    public ResponseEntity<List<IngreosPorMesAnioDTO> > obtenerIngresosPorMes() {
+
+        return ResponseEntity.ok(ingresoService.obtenerIngresosPorMes());
     }
 
     @GetMapping("/finalizadosTresMeses")

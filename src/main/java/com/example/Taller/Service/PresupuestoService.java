@@ -1,5 +1,7 @@
 package com.example.Taller.Service;
 
+import com.example.Taller.DTO.IngreosPorMesAnioDTO;
+import com.example.Taller.DTO.PresupuestosPorMesAnioDTO;
 import com.example.Taller.Entity.PresupuestoEntity;
 
 import java.util.List;
@@ -20,5 +22,9 @@ public interface PresupuestoService {
     double calcularGanancia(PresupuestoEntity presupuesto);
 
     double calcularGananciaMensual(int anio, int mes);
+
+    List<PresupuestosPorMesAnioDTO> obtenerPresupuestosPorAnio();
+
+    List<PresupuestosPorMesAnioDTO> obtenerPresupuestosPorMes();
 
 }

@@ -1,5 +1,7 @@
 package com.example.Taller.Service;
 
+import com.example.Taller.DTO.IngreosPorMesAnioDTO;
+import com.example.Taller.DTO.PresupuestosPorMesAnioDTO;
 import com.example.Taller.Entity.IngresoEntity;
 import com.example.Taller.Entity.IngresoRepuestoEntity;
 import com.example.Taller.Repository.IngresoRepository;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -96,6 +99,44 @@ public class PresupuestoServiceImpl implements PresupuestoService{
         }
 
         return manoDeObra + (costoRepuestoCargado - costoReal);
+    }
+
+    @Override
+    public List<PresupuestosPorMesAnioDTO>  obtenerPresupuestosPorAnio() {
+        List<Object[]> presupuestosPorMesAnioObjeto = presupuestoRepository.obtenerPresupuestosPorAnio();
+
+        List<PresupuestosPorMesAnioDTO> presupuestosPorMesAnioDTOList = new ArrayList<>();
+
+        for (Object[] fila : presupuestosPorMesAnioObjeto) {
+            PresupuestosPorMesAnioDTO dto = new PresupuestosPorMesAnioDTO();
+
+            dto.setMesAnio(((String) fila[0].toString()));
+            dto.setSumaTotal(((Number) fila[1]).intValue());
+            dto.setSumaManoDeObra(((Number) fila[2]).intValue());
+            dto.setSumaCostoRepuestos(((Number) fila[3]).intValue());
+
+            presupuestosPorMesAnioDTOList.add(dto);
+        }
+        return presupuestosPorMesAnioDTOList;
+    }
+
+    @Override
+    public List<PresupuestosPorMesAnioDTO>  obtenerPresupuestosPorMes() {
+        List<Object[]> presupuestosPorMesAnioObjeto = presupuestoRepository.obtenerPresupuestosPorMes();
+
+        List<PresupuestosPorMesAnioDTO> presupuestosPorMesAnioDTOList = new ArrayList<>();
+
+        for (Object[] fila : presupuestosPorMesAnioObjeto) {
+            PresupuestosPorMesAnioDTO dto = new PresupuestosPorMesAnioDTO();
+
+            dto.setMesAnio(((String) fila[0].toString()));
+            dto.setSumaTotal(((Number) fila[1]).intValue());
+            dto.setSumaManoDeObra(((Number) fila[2]).intValue());
+            dto.setSumaCostoRepuestos(((Number) fila[3]).intValue());
+
+            presupuestosPorMesAnioDTOList.add(dto);
+        }
+        return presupuestosPorMesAnioDTOList;
     }
 
     @Override

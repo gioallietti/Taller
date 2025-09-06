@@ -1,5 +1,7 @@
 package com.example.Taller.Controller;
 
+import com.example.Taller.DTO.IngreosPorMesAnioDTO;
+import com.example.Taller.DTO.PresupuestosPorMesAnioDTO;
 import com.example.Taller.Entity.PresupuestoEntity;
 import com.example.Taller.Service.PresupuestoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +58,17 @@ public class PresupuestoController {
 
         double ganancia = presupuestoService.calcularGanancia(presupuesto);
         return ResponseEntity.ok(ganancia);
+    }
+
+    @GetMapping("/presupuestosPorAnio")
+    public ResponseEntity<List<PresupuestosPorMesAnioDTO> > obtenerPresupuestosPorAnio() {
+
+        return ResponseEntity.ok(presupuestoService.obtenerPresupuestosPorAnio());
+    }
+
+    @GetMapping("/presupuestosPorMes")
+    public ResponseEntity<List<PresupuestosPorMesAnioDTO> > obtenerPresupuestosPorMes() {
+
+        return ResponseEntity.ok(presupuestoService.obtenerPresupuestosPorMes());
     }
 }
