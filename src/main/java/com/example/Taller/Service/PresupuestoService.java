@@ -23,6 +23,8 @@ public interface PresupuestoService {
 
     double calcularGananciaMensual(int anio, int mes);
 
+    double calcularGananciaAnual(int anio);
+
     List<PresupuestosPorMesAnioDTO> obtenerPresupuestosPorAnio();
 
     List<PresupuestosPorMesAnioDTO> obtenerPresupuestosPorMes();

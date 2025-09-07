@@ -60,6 +60,18 @@ public class PresupuestoController {
         return ResponseEntity.ok(ganancia);
     }
 
+    @GetMapping("/ganancia/mes/{anio}/{mes}")
+    public ResponseEntity<Double> obtenerGananciaPorMes(@PathVariable int anio, @PathVariable int mes) {
+        double ganancia = presupuestoService.calcularGananciaMensual(anio, mes);
+        return ResponseEntity.ok(ganancia);
+    }
+
+    @GetMapping("/ganancia/anio/{anio}")
+    public ResponseEntity<Double> obtenerGananciaPorAnio(@PathVariable int anio) {
+        double ganancia = presupuestoService.calcularGananciaAnual(anio);
+        return ResponseEntity.ok(ganancia);
+    }
+
     @GetMapping("/presupuestosPorAnio")
     public ResponseEntity<List<PresupuestosPorMesAnioDTO> > obtenerPresupuestosPorAnio() {
 

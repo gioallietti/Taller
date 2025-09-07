@@ -159,4 +159,18 @@ public class PresupuestoServiceImpl implements PresupuestoService{
 
         return totalGanancia;
     }
+
+    @Override
+    public double calcularGananciaAnual(int anio) {
+        List<PresupuestoEntity> todos = presupuestoRepository.findAll();
+        double totalGanancia = 0.0;
+        for (PresupuestoEntity presupuesto : todos) {
+            IngresoEntity ingreso = presupuesto.getIngreso();
+            LocalDate fecha = ingreso.getFechaFinalizacion();
+            if (fecha != null && fecha.getYear() == anio) {
+                totalGanancia += calcularGanancia(presupuesto);
+            }
+        }
+        return totalGanancia;
+    }
 }
