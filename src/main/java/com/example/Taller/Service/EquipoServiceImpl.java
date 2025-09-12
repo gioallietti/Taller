@@ -20,7 +20,24 @@ public class EquipoServiceImpl implements EquipoService{
     private TipoEquipoRepository tipoEquipoRepository;
 
     public EquipoEntity guardarEquipo(EquipoEntity equipo) {
-        return (EquipoEntity) this.equipoRepository.save(equipo);
+        if (equipo.getModelo() == null || equipo.getModelo().isEmpty() || equipo.getModelo().length() > 50) {
+            throw new IllegalArgumentException("El modelo debe tener entre 1 y 50 caracteres");
+        }
+
+        EquipoEntity equipoExistente = equipoRepository.findByTipoEquipoAndMarcaAndModelo(
+                equipo.getTipoEquipo(), equipo.getMarca(), equipo.getModelo());
+
+        if (equipoExistente != null) {
+            if (Boolean.FALSE.equals(equipoExistente.getActivo())) {
+                equipoExistente.setActivo(true);
+                return equipoRepository.save(equipoExistente);
+            } else {
+                throw new IllegalArgumentException("Ya existe un equipo activo con ese tipo, marca y modelo.");
+            }
+        }
+
+        equipo.setActivo(true);
+        return equipoRepository.save(equipo);
     }
 
     public EquipoEntity obtenerEquipoPorId(int id) {

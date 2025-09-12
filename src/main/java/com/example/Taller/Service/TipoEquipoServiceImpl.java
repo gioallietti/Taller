@@ -14,12 +14,20 @@ public class TipoEquipoServiceImpl implements TipoEquipoService {
     private TipoEquipoRepository tipoEquipoRepository;
 
     public TipoEquipoEntity guardarTipoEquipo(TipoEquipoEntity tipoEquipo) {
-
-        if (tipoEquipoRepository.findByNombre(tipoEquipo.getNombre()) != null){
-            throw new IllegalArgumentException("Ese tipo de equipo ya existe");
+        if (tipoEquipo.getNombre().length() < 2 || tipoEquipo.getNombre().length() > 25) {
+            throw new IllegalArgumentException("El tipo de equipo debe tener entre 2 y 25 caracteres");
         }
-
-        return (TipoEquipoEntity) this.tipoEquipoRepository.save(tipoEquipo);
+        TipoEquipoEntity tipoEquipoExistente = tipoEquipoRepository.findByNombre(tipoEquipo.getNombre());
+        if (tipoEquipoExistente != null) {
+            if (Boolean.FALSE.equals(tipoEquipoExistente.getActivo())) {
+                tipoEquipoExistente.setActivo(true);
+                return tipoEquipoRepository.save(tipoEquipoExistente);
+            } else {
+                throw new IllegalArgumentException("Ya existe un tipo de equipo activo con ese nombre.");
+            }
+        }
+        tipoEquipo.setActivo(true);
+        return tipoEquipoRepository.save(tipoEquipo);
     }
 
     public TipoEquipoEntity obtenerTipoEquipoPorId(int id) {

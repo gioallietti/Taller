@@ -19,12 +19,45 @@ public class RepuestoServiceImpl implements RepuestoService{
     @Override
     public RepuestoEntity guardarRepuesto(RepuestoEntity repuesto) {
 
+        if(repuesto.getStockMinimo() > repuesto.getCantidad()){
+            throw new IllegalArgumentException("La cantidad no puede ser menos que la cantidad minima");
+        }
+
+        if(repuesto.getModelo().length() > 30){
+            throw new IllegalArgumentException("EL nombre del modelo demasiado largo");
+        }
+
+        RepuestoEntity repuestoExistente = repuestoRepository.findByNombreAndMarcaAndModelo(
+                repuesto.getNombre(), repuesto.getMarca(), repuesto.getModelo());
+
+        if (repuestoExistente != null) {
+            if (Boolean.FALSE.equals(repuestoExistente.getActivo())) {
+                repuestoExistente.setActivo(true);
+                repuestoExistente.setPrecio(repuesto.getPrecio());
+                repuestoExistente.setDescripcion(repuesto.getDescripcion());
+                repuestoExistente.setCantidad(repuesto.getCantidad());
+                repuestoExistente.setFecha(repuesto.getFecha());
+                repuestoExistente.setStockMinimo(repuesto.getStockMinimo());
+
+                return repuestoRepository.save(repuestoExistente);
+            } else {
+                throw new IllegalArgumentException("Ya existe un repuesto activo con ese nombre, marca y modelo.");
+            }
+        }
+
+        repuesto.setActivo(true);
+        return repuestoRepository.save(repuesto);
+    }
+
+    /*@Override
+    public RepuestoEntity guardarRepuesto(RepuestoEntity repuesto) {
+
         if(repuesto.getModelo().length() > 30){
             throw new IllegalArgumentException("EL nombre del modelo demasiado largo");
         }
 
         return repuestoRepository.save(repuesto);
-    }
+    }*/
 
     @Override
     public RepuestoEntity actualizarRepuesto(RepuestoEntity repuesto){

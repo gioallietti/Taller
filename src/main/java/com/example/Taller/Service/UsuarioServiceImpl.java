@@ -17,8 +17,25 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioEntity guardarUsuario(UsuarioEntity usuario) {
+        UsuarioEntity usuarioExistente = usuarioRepository.findByEmail(usuario.getEmail());
+
+        if (usuarioExistente != null) {
+            if (Boolean.FALSE.equals(usuarioExistente.getActivo())) {
+                usuarioExistente.setActivo(true);
+                usuarioExistente.setPassword(usuario.getPassword());
+                usuarioExistente.setNombre(usuario.getNombre());
+                usuarioExistente.setApellido(usuario.getApellido());
+                usuarioExistente.setTipoUsuario(usuario.getTipoUsuario());
+                return usuarioRepository.save(usuarioExistente);
+            } else {
+                throw new IllegalArgumentException("Ya existe un usuario con ese email.");
+            }
+        }
+
+        usuario.setActivo(true);
         return usuarioRepository.save(usuario);
     }
+
 
     @Override
     public UsuarioEntity actualizarUsuario(UsuarioEntity usuario){

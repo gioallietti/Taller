@@ -13,4 +13,6 @@ public interface EquipoRepository extends JpaRepository<EquipoEntity, Integer> {
 
     List<EquipoEntity> findAllByActivoTrue();
 
+    EquipoEntity findByTipoEquipoAndMarcaAndModelo(TipoEquipoEntity tipoEquipo, MarcaEntity marca, String modelo);
+
 }

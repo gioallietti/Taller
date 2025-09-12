@@ -10,4 +10,6 @@ public interface RepuestoRepository extends JpaRepository<RepuestoEntity, Intege
 
     List<RepuestoEntity> findAllByActivoTrue();
 
+    RepuestoEntity findByNombreAndMarcaAndModelo(String nombre, MarcaEntity marca, String modelo);
+
 }

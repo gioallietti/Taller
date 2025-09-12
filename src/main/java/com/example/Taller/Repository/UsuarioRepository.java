@@ -15,4 +15,6 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, String> 
 
     List<UsuarioEntity> findAllByActivoTrue();
 
+    UsuarioEntity findByEmail(String email);
+
 }

@@ -14,17 +14,24 @@ public class MarcaServiceImpl implements MarcaService{
     private MarcaRepository marcaRepository;
 
     public MarcaEntity guardarMarca(MarcaEntity marca) {
-
-        if (marca.getNombre().length() < 2 || marca.getNombre().length() > 25 ){
+        if (marca.getNombre().length() < 2 || marca.getNombre().length() > 25) {
             throw new IllegalArgumentException("La marca debe tener entre 2 y 25 caracteres");
         }
 
-        if (marcaRepository.findByNombre(marca.getNombre()) != null){
-            throw new IllegalArgumentException("Ya existe una marca con ese nombre.");
-        }
+        MarcaEntity marcaExistente = marcaRepository.findByNombre(marca.getNombre());
 
-        return (MarcaEntity) this.marcaRepository.save(marca);
+        if (marcaExistente != null) {
+            if (Boolean.FALSE.equals(marcaExistente.getActivo())) {
+                marcaExistente.setActivo(true);
+                return marcaRepository.save(marcaExistente);
+            } else {
+                throw new IllegalArgumentException("Ya existe una marca activa con ese nombre.");
+            }
+        }
+        marca.setActivo(true);
+        return marcaRepository.save(marca);
     }
+
     public MarcaEntity obtenerMarcaPorId(int id) {
         return (MarcaEntity) this.marcaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Marca encontrada con id: " + id));
     }
