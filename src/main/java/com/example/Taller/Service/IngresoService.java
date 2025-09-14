@@ -37,6 +37,8 @@ public interface IngresoService {
 
     List<IngresoEntity> listarIngresosFinalizados();
 
+    List<IngresoEntity> obtenerIngresosFinalizados();
+
     List<IngreosPorMesAnioDTO> obtenerIngresosPorAnio();
 
     List<IngreosPorMesAnioDTO> obtenerIngresosPorMes();
