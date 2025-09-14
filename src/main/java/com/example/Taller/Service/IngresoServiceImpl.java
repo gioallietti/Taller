@@ -168,6 +168,11 @@ public class IngresoServiceImpl implements IngresoService{
     }
 
     @Override
+    public List<IngresoEntity> obtenerIngresosFinalizados() {
+        return ingresoRepository.obtenerIngresosFinalizados();
+    }
+
+    @Override
     public List<IngresoEntity> listarIngresosNoFinalizados() {
         return ingresoRepository.findByEstadoIdNot(5);
     }

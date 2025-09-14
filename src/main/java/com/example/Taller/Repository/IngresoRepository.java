@@ -33,9 +33,15 @@ public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer>
             "order by year(fecha_ingreso) desc", nativeQuery = true)
     List<Object[]>  obtenerIngresosPorAnio();
 
-    @Query (value = "SELECT DATE_FORMAT(fecha_ingreso, '%m-%Y') as mes,  COUNT(*) as cantidad \n" +
+    @Query (value = "SELECT DATE_FORMAT(fecha_ingreso, '%Y-%m') as mes,  COUNT(*) as cantidad \n" +
             "FROM taller4.ingresos \n" +
             "GROUP BY mes \n" +
             "order by mes desc", nativeQuery = true)
     List<Object[]>  obtenerIngresosPorMes();
+
+    @Query (value = "SELECT * FROM taller4.ingresos \n " +
+            "WHERE (estado_id = 5 OR estado_id = 6) \n " +
+            "  AND fecha_finalizacion >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH) \n " +
+            "  order by fecha_finalizacion desc", nativeQuery = true)
+    List<IngresoEntity>  obtenerIngresosFinalizados();
 }

@@ -150,6 +150,11 @@ public class IngresoController {
         return ResponseEntity.ok(ingresoService.obtenerIngresosPorMes());
     }
 
+    @GetMapping("/finalizadosParaEntregar")
+    public ResponseEntity<List<IngresoEntity>> obtenerIngresosFinalizados() {
+        return ResponseEntity.ok(ingresoService.obtenerIngresosFinalizados());
+    }
+
     @GetMapping("/finalizadosTresMeses")
     public ResponseEntity<List<IngresoEntity>> listarIngresosFinalizadosAntiguos() {
         List<IngresoEntity> ingresos = ingresoService.IngresosFinalizadosMasTresMeses();
