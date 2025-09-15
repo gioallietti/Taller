@@ -12,8 +12,8 @@ public class ClienteEntity extends PersonaEntity{
     @Column(nullable = false)
     private String ciudad;
 
-    @Column(nullable = false)
-    private String pais;
+    @ManyToOne(optional = false)
+    private PaisEntity pais;
 
     @Column(nullable = true)
     private String telefono2;
@@ -53,11 +53,11 @@ public class ClienteEntity extends PersonaEntity{
         this.ciudad = ciudad;
     }
 
-    public String getPais() {
+    public PaisEntity getPais() {
         return pais;
     }
 
-    public void setPais(String pais) {
+    public void setPais(PaisEntity pais) {
         this.pais = pais;
     }
 }
