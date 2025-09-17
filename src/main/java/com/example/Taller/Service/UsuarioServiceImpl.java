@@ -32,6 +32,24 @@ public class UsuarioServiceImpl implements UsuarioService {
             }
         }
 
+        UsuarioEntity usuarioExistentePorCedula = usuarioRepository.findByCedula(usuario.getCedula());
+
+        if (usuarioExistentePorCedula != null) {
+            if (Boolean.FALSE.equals(usuarioExistentePorCedula.getActivo())) {
+                usuarioExistentePorCedula.setActivo(true);
+                usuarioExistentePorCedula.setPassword(usuario.getPassword());
+                usuarioExistentePorCedula.setNombre(usuario.getNombre());
+                usuarioExistentePorCedula.setApellido(usuario.getApellido());
+                usuarioExistentePorCedula.setTipoUsuario(usuario.getTipoUsuario());
+                usuarioExistentePorCedula.setEmail(usuario.getEmail());
+                usuarioExistentePorCedula.setTelefono(usuario.getTelefono());
+                return usuarioRepository.save(usuarioExistentePorCedula);
+            } else {
+                throw new IllegalArgumentException("Ya existe un usuario con esa cédula.");
+            }
+        }
+
+
         usuario.setActivo(true);
         return usuarioRepository.save(usuario);
     }

@@ -17,4 +17,6 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, String> 
 
     UsuarioEntity findByEmail(String email);
 
+    UsuarioEntity findByCedula(String cedula);
+
 }
