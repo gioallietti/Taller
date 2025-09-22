@@ -3,6 +3,8 @@ package com.example.Taller.Service;
 import com.example.Taller.DTO.IngreosPorMesAnioDTO;
 import com.example.Taller.Entity.IngresoEntity;
 import com.example.Taller.Entity.IngresoRepuestoEntity;
+import com.example.Taller.Repository.ClienteRepository;
+import com.example.Taller.Repository.EquipoRepository;
 import com.example.Taller.Repository.IngresoRepository;
 import com.example.Taller.Repository.IngresoRepuestoRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,6 +22,12 @@ public class IngresoServiceImpl implements IngresoService{
     private IngresoRepository ingresoRepository;
 
     @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private EquipoRepository equipoRepository;
+
+    @Autowired
     private IngresoRepuestoRepository ingresoRepuestoRepository;
 
     @Override
@@ -27,6 +35,19 @@ public class IngresoServiceImpl implements IngresoService{
 
         if (ingresoRepository.findByNumeroSerie(ingreso.getNumeroSerie()) != null){
             throw new IllegalArgumentException("Ya se ha ingresado un equipo con ese numero de serie");
+        }
+
+        if (ingreso.getCliente() == null || ingreso.getCliente().getId() == null || !clienteRepository.existsById(ingreso.getCliente().getId())) {
+            throw new IllegalArgumentException("El cliente no existe, Por favor proba con otro");
+        }
+
+        if(ingreso.getIngresadoPor() == null || ingreso.getIngresadoPor().getId() == null || !clienteRepository.existsById(ingreso.getIngresadoPor().getId())){
+            throw new IllegalArgumentException("No esta la sesion ingresada, intentelo de nuevo");
+        }
+
+
+        if (ingreso.getEquipo() == null || ingreso.getEquipo().getId() == null || !equipoRepository.existsById(ingreso.getEquipo().getId())){
+            throw new IllegalArgumentException("El cliente no existe, Por favor proba con otro");
         }
 
         return ingresoRepository.save(ingreso);
