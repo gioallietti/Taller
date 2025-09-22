@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -82,5 +83,11 @@ public class PresupuestoController {
     public ResponseEntity<List<PresupuestosPorMesAnioDTO> > obtenerPresupuestosPorMes() {
 
         return ResponseEntity.ok(presupuestoService.obtenerPresupuestosPorMes());
+    }
+
+    @GetMapping("/ganancia/rango")
+    public ResponseEntity<Double> obtenerGananciaPorFechas(@RequestParam LocalDate fechaInicio, @RequestParam LocalDate fechaFin) {
+        double ganancia = presupuestoService.calcularGananciaPorFechas(fechaInicio, fechaFin);
+        return ResponseEntity.ok(ganancia);
     }
 }

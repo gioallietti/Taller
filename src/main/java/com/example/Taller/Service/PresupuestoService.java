@@ -4,6 +4,7 @@ import com.example.Taller.DTO.IngreosPorMesAnioDTO;
 import com.example.Taller.DTO.PresupuestosPorMesAnioDTO;
 import com.example.Taller.Entity.PresupuestoEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface PresupuestoService {
@@ -28,5 +29,7 @@ public interface PresupuestoService {
     List<PresupuestosPorMesAnioDTO> obtenerPresupuestosPorAnio();
 
     List<PresupuestosPorMesAnioDTO> obtenerPresupuestosPorMes();
+
+    double calcularGananciaPorFechas(LocalDate fechaInicio, LocalDate fechaFin);
 
 }

@@ -173,4 +173,14 @@ public class PresupuestoServiceImpl implements PresupuestoService{
         }
         return totalGanancia;
     }
+
+    @Override
+    public double calcularGananciaPorFechas(LocalDate fechaInicio, LocalDate fechaFin) {
+        List<PresupuestoEntity> presupuestosEntre = presupuestoRepository.findByFechaBetween(fechaInicio, fechaFin);
+        double totalGanancia = 0.0;
+        for (PresupuestoEntity presupuesto : presupuestosEntre) {
+            totalGanancia += calcularGanancia(presupuesto);
+        }
+        return totalGanancia;
+    }
 }
