@@ -3,6 +3,7 @@ package com.example.Taller.Service;
 import com.example.Taller.Entity.ClienteEntity;
 import com.example.Taller.Entity.MarcaEntity;
 import com.example.Taller.Repository.ClienteRepository;
+import com.example.Taller.Repository.PaisRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private PaisRepository paisRepository;
 
     @Override
     public ClienteEntity guardarCliente(ClienteEntity cliente) {
@@ -28,6 +32,10 @@ public class ClienteServiceImpl implements ClienteService{
         if (!cliente.getNombre().matches("^[A-Za-záéíóúÁÉÍÓÚñÑ\\s]+$") ||
                 !cliente.getApellido().matches("^[A-Za-záéíóúÁÉÍÓÚñÑ\\s]+$")) {
             throw new IllegalArgumentException("El nombre y el apellido solo pueden tener letras.");
+        }
+
+        if (cliente.getPais() == null || cliente.getPais().getId() == null || !paisRepository.existsById(cliente.getPais().getId())) {
+            throw new IllegalArgumentException("El Pais no existe, Por favor proba con otro");
         }
 
         if (!cliente.getTelefono().matches("^\\+?[0-9]+$")){
