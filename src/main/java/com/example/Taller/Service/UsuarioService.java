@@ -1,5 +1,6 @@
 package com.example.Taller.Service;
 
+import com.example.Taller.DTO.UsuarioDTO;
 import com.example.Taller.Entity.UsuarioEntity;
 import org.apache.coyote.BadRequestException;
 
@@ -17,7 +18,7 @@ public interface UsuarioService {
 
     boolean eliminarUsuario(String id);
 
-    UsuarioEntity login(UsuarioEntity usuarioEntity) throws BadRequestException;
+    UsuarioDTO login(UsuarioEntity usuarioEntity) throws BadRequestException;
 
     UsuarioEntity obtenerUsuarioPorId(String id);
 
