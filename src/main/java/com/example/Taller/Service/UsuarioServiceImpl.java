@@ -1,5 +1,6 @@
 package com.example.Taller.Service;
 
+import com.example.Taller.DTO.UsuarioDTO;
 import com.example.Taller.Entity.UsuarioEntity;
 import com.example.Taller.Repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -109,12 +110,22 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public UsuarioEntity login(UsuarioEntity usuarioEntity) throws BadRequestException {
+    public UsuarioDTO login(UsuarioEntity usuarioEntity) throws BadRequestException {
         try {
-            return usuarioRepository.findByEmailAndPassword(
+            UsuarioEntity buscarUsuario = usuarioRepository.findByEmailAndPassword(
                     usuarioEntity.getEmail(),
                     usuarioEntity.getPassword()
             );
+            UsuarioDTO usuarioDTO = new UsuarioDTO();
+            if(buscarUsuario != null) {
+                usuarioDTO.setId(buscarUsuario.getId());
+                usuarioDTO.setNombre(buscarUsuario.getNombre());
+                usuarioDTO.setApellido(buscarUsuario.getApellido());
+                usuarioDTO.setEmail(buscarUsuario.getEmail());
+                usuarioDTO.setTipoUsuario(buscarUsuario.getTipoUsuario());
+            }
+            return usuarioDTO;
+
         } catch (RuntimeException e) {
             throw new BadRequestException("Credenciales incorrectas");
         }
