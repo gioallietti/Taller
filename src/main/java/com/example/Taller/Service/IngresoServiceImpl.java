@@ -185,7 +185,7 @@ public class IngresoServiceImpl implements IngresoService{
     @Override
     public List<IngresoEntity> IngresosFinalizadosMasTresMeses() {
         LocalDate fechaMaxima = LocalDate.now().minusMonths(3);
-        return ingresoRepository.findByFechaFinalizacionBefore(fechaMaxima);
+        return ingresoRepository.findByFechaFinalizacionBeforeOrderByFechaFinalizacionAsc(fechaMaxima);
     }
 
     @Override
