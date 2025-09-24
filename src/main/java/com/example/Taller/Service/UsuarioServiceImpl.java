@@ -109,7 +109,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 new EntityNotFoundException("Tipo de usuario encontrado con id: " + id));
     }
 
-    @Override
+    /*@Override
     public UsuarioDTO login(UsuarioEntity usuarioEntity) throws BadRequestException {
         try {
             UsuarioEntity buscarUsuario = usuarioRepository.findByEmailAndPassword(
@@ -129,5 +129,32 @@ public class UsuarioServiceImpl implements UsuarioService {
         } catch (RuntimeException e) {
             throw new BadRequestException("Credenciales incorrectas");
         }
+    }*/
+
+
+    @Override
+public UsuarioDTO login(UsuarioEntity usuarioEntity) {
+    if (usuarioEntity.getEmail() == null || usuarioEntity.getPassword() == null) {
+        throw new IllegalArgumentException("Email y contraseña son obligatorios.");
     }
+
+    UsuarioEntity buscarUsuario = usuarioRepository.findByEmailAndPassword(
+            usuarioEntity.getEmail(),
+            usuarioEntity.getPassword()
+    );
+
+    if (buscarUsuario == null || Boolean.FALSE.equals(buscarUsuario.getActivo())) {
+        throw new IllegalArgumentException("Email o contraseña incorrectos.");
+    }
+
+    UsuarioDTO usuarioDTO = new UsuarioDTO();
+    usuarioDTO.setId(buscarUsuario.getId());
+    usuarioDTO.setNombre(buscarUsuario.getNombre());
+    usuarioDTO.setApellido(buscarUsuario.getApellido());
+    usuarioDTO.setEmail(buscarUsuario.getEmail());
+    usuarioDTO.setTipoUsuario(buscarUsuario.getTipoUsuario());
+
+    return usuarioDTO;
+}
+
 }
