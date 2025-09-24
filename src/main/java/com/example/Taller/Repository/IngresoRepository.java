@@ -23,7 +23,7 @@ public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer>
 
     List<IngresoEntity> findByEstadoId(Integer estadoId);
 
-    List<IngresoEntity> findByFechaFinalizacionBefore(LocalDate fechaMaxima);
+    List<IngresoEntity> findByFechaFinalizacionBeforeOrderByFechaFinalizacionAsc(LocalDate fechaMaxima);
 
     IngresoEntity findByNumeroSerie(String numeroSerie);
 
