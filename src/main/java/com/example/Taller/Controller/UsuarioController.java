@@ -1,5 +1,6 @@
 package com.example.Taller.Controller;
 
+import com.example.Taller.DTO.UsuarioDTO;
 import com.example.Taller.Entity.UsuarioEntity;
 import com.example.Taller.Service.UsuarioService;
 import org.apache.coyote.BadRequestException;
@@ -58,7 +59,7 @@ public class UsuarioController {
     public boolean eliminarUsuario(@PathVariable String id) {
         return usuarioService.eliminarUsuario(id);
     }
-
+/*
     @PostMapping ("/login")
     public ResponseEntity<?> login(@RequestBody UsuarioEntity usuario){
         try {
@@ -69,4 +70,11 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al  conectar con la base de datos");
         }
     }
+
+    */
+    @PostMapping("/login")
+public ResponseEntity<UsuarioDTO> login(@RequestBody UsuarioEntity usuario) throws BadRequestException {
+    return ResponseEntity.ok(usuarioService.login(usuario));
+}
+
 }
