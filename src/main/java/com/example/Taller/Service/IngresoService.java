@@ -1,6 +1,7 @@
 package com.example.Taller.Service;
 
 import com.example.Taller.DTO.IngreosPorMesAnioDTO;
+import com.example.Taller.Entity.EstadoEntity;
 import com.example.Taller.Entity.IngresoEntity;
 
 import java.time.LocalDate;
@@ -21,7 +22,7 @@ public interface IngresoService {
 
     IngresoEntity actualizarIngreso(int id, IngresoEntity ingreso);
 
-    IngresoEntity actualizarIngresoEstado(int id, IngresoEntity ingreso);
+    IngresoEntity actualizarIngresoEstado(int id, EstadoEntity estado);
 
     IngresoEntity guardarMensaje(int id, IngresoEntity ingreso);
 
