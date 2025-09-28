@@ -1,6 +1,7 @@
 package com.example.Taller.Service;
 
 import com.example.Taller.DTO.IngreosPorMesAnioDTO;
+import com.example.Taller.Entity.EstadoEntity;
 import com.example.Taller.Entity.IngresoEntity;
 import com.example.Taller.Entity.IngresoRepuestoEntity;
 import com.example.Taller.Repository.ClienteRepository;
@@ -139,11 +140,11 @@ public class IngresoServiceImpl implements IngresoService{
     }
 
     @Override
-    public IngresoEntity actualizarIngresoEstado(int id, IngresoEntity ingreso) {
+    public IngresoEntity actualizarIngresoEstado(int id, EstadoEntity estado) {
         IngresoEntity ingresoExistente = ingresoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("El ingreso con id " + id + " no existe"));
 
-        ingresoExistente.setEstado(ingreso.getEstado());
+        ingresoExistente.setEstado(estado);
 
         return ingresoRepository.save(ingresoExistente);
     }
