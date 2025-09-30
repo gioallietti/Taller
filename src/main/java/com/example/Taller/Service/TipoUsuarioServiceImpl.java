@@ -34,4 +34,12 @@ public class TipoUsuarioServiceImpl implements TipoUsuarioService{
         }
     }
 
+    @Override
+    public TipoUsuarioEntity actualizarTipoUsuario(int id, TipoUsuarioEntity tipoUsuario) {
+        if (!tipoUsuarioRepository.existsById(id)) {
+            throw new EntityNotFoundException("El tipo de usuario con id " + id + " no existe");
+        }
+        tipoUsuario.setId(id);
+        return tipoUsuarioRepository.save(tipoUsuario);
+    }
 }

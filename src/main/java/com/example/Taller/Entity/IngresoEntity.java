@@ -1,9 +1,11 @@
 package com.example.Taller.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,14 +18,16 @@ public class IngresoEntity {
     @ManyToOne(optional = false)
     private ClienteEntity cliente;
 
-    @ManyToMany
-    @JoinTable(name = "ingresoEquipo")
-    private List<EquipoEntity> equipos;
+    @ManyToOne(optional = false)
+    private UsuarioEntity ingresadoPor;
 
-    @Column(nullable = false)
-    private String modelo;
+    @ManyToOne(optional = true)
+    private UsuarioEntity reparadoPor;
 
-    @Column(name = "numeroSerie", nullable = false, unique = true)
+    @ManyToOne(optional = false)
+    private EquipoEntity equipo;
+
+    @Column(name = "numeroSerie", nullable = false)
     private String numeroSerie;
 
     @Column(nullable = false)
@@ -42,19 +46,25 @@ public class IngresoEntity {
 
     private String detalle;
 
+    @Column(nullable = true)
+    private String solucion;
+
     @Column(nullable = false)
     private boolean presupuestado;
 
-    @ManyToMany
-    @JoinTable(name = "ingresoRepuesto")
-    private List<RepuestoEntity> repuestos;
+    @Column(nullable = true)
+    private String avisoCliente;
 
-    public List<RepuestoEntity> getRepuestos() {
-        return repuestos;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "ingreso", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<IngresoRepuestoEntity> ingresoRepuestos = new ArrayList<>();
+
+    public List<IngresoRepuestoEntity> getIngresoRepuestos() {
+        return ingresoRepuestos;
     }
 
-    public void setRepuestos(List<RepuestoEntity> repuestos) {
-        this.repuestos = repuestos;
+    public void setIngresoRepuestos(List<IngresoRepuestoEntity> ingresoRepuestos) {
+        this.ingresoRepuestos = ingresoRepuestos;
     }
 
     public Integer getId() {
@@ -73,20 +83,28 @@ public class IngresoEntity {
         this.cliente = cliente;
     }
 
-    public List<EquipoEntity> getEquipos() {
-        return equipos;
+    public UsuarioEntity getIngresadoPor() {
+        return ingresadoPor;
     }
 
-    public void setEquipos(List<EquipoEntity> equipos) {
-        this.equipos = equipos;
+    public void setIngresadoPor(UsuarioEntity ingresadoPor) {
+        this.ingresadoPor = ingresadoPor;
     }
 
-    public String getModelo() {
-        return modelo;
+    public UsuarioEntity getReparadoPor() {
+        return reparadoPor;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public void setReparadoPor(UsuarioEntity reparadoPor) {
+        this.reparadoPor = reparadoPor;
+    }
+
+    public EquipoEntity getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(EquipoEntity equipo) {
+        this.equipo = equipo;
     }
 
     public String getNumeroSerie() {
@@ -151,5 +169,21 @@ public class IngresoEntity {
 
     public void setPresupuestado(boolean presupuestado) {
         this.presupuestado = presupuestado;
+    }
+
+    public String getAvisoCliente() {
+        return avisoCliente;
+    }
+
+    public void setAvisoCliente(String avisoCliente) {
+        this.avisoCliente = avisoCliente;
+    }
+
+    public String getSolucion() {
+        return solucion;
+    }
+
+    public void setSolucion(String solucion) {
+        this.solucion = solucion;
     }
 }

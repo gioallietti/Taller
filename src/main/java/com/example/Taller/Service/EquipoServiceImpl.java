@@ -1,6 +1,7 @@
 package com.example.Taller.Service;
 
 import com.example.Taller.Entity.EquipoEntity;
+import com.example.Taller.Entity.MarcaEntity;
 import com.example.Taller.Entity.TipoEquipoEntity;
 import com.example.Taller.Repository.EquipoRepository;
 import com.example.Taller.Repository.TipoEquipoRepository;
@@ -19,7 +20,24 @@ public class EquipoServiceImpl implements EquipoService{
     private TipoEquipoRepository tipoEquipoRepository;
 
     public EquipoEntity guardarEquipo(EquipoEntity equipo) {
-        return (EquipoEntity) this.equipoRepository.save(equipo);
+        if (equipo.getModelo() == null || equipo.getModelo().isEmpty() || equipo.getModelo().length() > 50) {
+            throw new IllegalArgumentException("El modelo debe tener entre 1 y 50 caracteres");
+        }
+
+        EquipoEntity equipoExistente = equipoRepository.findByTipoEquipoAndMarcaAndModelo(
+                equipo.getTipoEquipo(), equipo.getMarca(), equipo.getModelo());
+
+        if (equipoExistente != null) {
+            if (Boolean.FALSE.equals(equipoExistente.getActivo())) {
+                equipoExistente.setActivo(true);
+                return equipoRepository.save(equipoExistente);
+            } else {
+                throw new IllegalArgumentException("Ya existe un equipo activo con ese tipo, marca y modelo.");
+            }
+        }
+
+        equipo.setActivo(true);
+        return equipoRepository.save(equipo);
     }
 
     public EquipoEntity obtenerEquipoPorId(int id) {
@@ -27,22 +45,29 @@ public class EquipoServiceImpl implements EquipoService{
     }
 
     public List<EquipoEntity> obtenerTodosLosEquipos() {
-        return this.equipoRepository.findAll();
+        return this.equipoRepository.findAllByActivoTrue();
     }
 
     public String eliminarEquipo(int id) {
-        if (!this.equipoRepository.existsById(id)) {
-            throw new EntityNotFoundException("El equipo con id " + id + " no existe");
-        } else {
-            this.equipoRepository.deleteById(id);
-            return "Equipo eliminada con éxito";
-        }
+        EquipoEntity equipo = this.equipoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("El equipo con id " + id + " no existe"));
+        equipo.setActivo(false);
+        this.equipoRepository.save(equipo);
+        return "Equipo eliminado lógicamente con éxito";
     }
 
     @Override
     public List<EquipoEntity> listarEquiposPorTipoEquipo(int tipoEquipoId) {
         TipoEquipoEntity tipoEquipo = this.tipoEquipoRepository.findById(tipoEquipoId).orElseThrow(() -> new EntityNotFoundException("Tipo de equipo no encontrado"));
-        List<EquipoEntity> equipos = this.equipoRepository.findByTipoEquipo(tipoEquipo);
-        return equipos;
+        return this.equipoRepository.findByTipoEquipo(tipoEquipo);
+    }
+
+    @Override
+    public EquipoEntity actualizarEquipo(int id, EquipoEntity equipo) {
+        if (!equipoRepository.existsById(id)) {
+            throw new EntityNotFoundException("El equipo con id " + id + " no existe");
+        }
+        equipo.setId(id);
+        return equipoRepository.save(equipo);
     }
 }

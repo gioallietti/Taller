@@ -23,6 +23,28 @@ public class PresupuestoEntity {
     @Column(nullable = false)
     private Double costoRepuesto;
 
+    @Column(nullable = true)
+    private Double totalIva;
+
+    @Column(nullable = true)
+    private Double totalSinIva;
+
+    public Double getTotalIva() {
+        return totalIva;
+    }
+
+    public void setTotalIva(Double totalIva) {
+        this.totalIva = totalIva;
+    }
+
+    public Double getTotalSinIva() {
+        return totalSinIva;
+    }
+
+    public void setTotalSinIva(Double totalSinIva) {
+        this.totalSinIva = totalSinIva;
+    }
+
     public Integer getId() {
         return id;
     }

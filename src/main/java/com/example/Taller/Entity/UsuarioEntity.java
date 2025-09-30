@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "usuarios")
-public class UsuarioEntity {
-    @Id
+public class UsuarioEntity extends PersonaEntity {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
@@ -14,6 +13,17 @@ public class UsuarioEntity {
 
     @ManyToOne(optional = false)
     private TipoUsuarioEntity tipoUsuario;
+
+    @Column(nullable = false)
+    private Boolean activo = true;
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
 
     public String getEmail() {
         return email;

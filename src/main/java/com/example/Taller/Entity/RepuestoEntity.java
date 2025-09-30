@@ -27,7 +27,24 @@ public class RepuestoEntity {
     private String descripcion;
 
     @Column(nullable = false)
+    private int cantidad;
+
+    @Column(nullable = false)
     private LocalDate fecha;
+
+    @Column(nullable = false)
+    private int stockMinimo;
+
+    @Column(nullable = false)
+    private Boolean activo = true;
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
 
     public Integer getId() {
         return id;
@@ -81,7 +98,19 @@ public class RepuestoEntity {
         return fecha;
     }
 
+    public int getCantidad() { return cantidad; }
+
+    public void setCantidad(int cantidad) { this.cantidad = cantidad; }
+
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public int getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(int stockMinimo) {
+        this.stockMinimo = stockMinimo;
     }
 }

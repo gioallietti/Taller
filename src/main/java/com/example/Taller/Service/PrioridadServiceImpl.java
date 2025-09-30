@@ -15,6 +15,15 @@ public class PrioridadServiceImpl implements PrioridadService{
 
     @Override
     public PrioridadEntity guardarPrioridad(PrioridadEntity prioridad) {
+
+        if (prioridadRepository.findByNombre(prioridad.getNombre()) != null){
+            throw new IllegalArgumentException("La prioridad con ese nombre ya existe");
+        }
+
+        if (prioridadRepository.findByNivel(prioridad.getNivel()) != null){
+            throw new IllegalArgumentException("Ya hay una prioridad que tiene ese nivel");
+        }
+
         return prioridadRepository.save(prioridad);
     }
 
@@ -36,5 +45,14 @@ public class PrioridadServiceImpl implements PrioridadService{
         }
         prioridadRepository.deleteById(id);
         return "Prioridad eliminada con éxito";
+    }
+
+    @Override
+    public PrioridadEntity actualizarPrioridad(int id, PrioridadEntity prioridad) {
+        if (!prioridadRepository.existsById(id)) {
+            throw new EntityNotFoundException("La prioridad con id " + id + " no existe");
+        }
+        prioridad.setId(id);
+        return prioridadRepository.save(prioridad);
     }
 }

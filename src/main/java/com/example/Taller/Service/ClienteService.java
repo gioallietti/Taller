@@ -9,4 +9,5 @@ public interface ClienteService {
     ClienteEntity obtenerClientePorId(int id);
     List<ClienteEntity> obtenerTodosLosClientes();
     String eliminarCliente(int id);
+    ClienteEntity actualizarCliente(int id, ClienteEntity cliente);
 }

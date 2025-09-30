@@ -3,9 +3,9 @@ package com.example.Taller.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "marcas")
+@Table(name = "paises")
 
-public class MarcaEntity {
+public class PaisEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

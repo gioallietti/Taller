@@ -25,7 +25,7 @@ public class ClienteController {
         return ResponseEntity.ok(clienteService.obtenerClientePorId(id));
     }
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<ClienteEntity>> obtenerTodosLosClientes() {
         return ResponseEntity.ok(clienteService.obtenerTodosLosClientes());
     }
@@ -33,5 +33,10 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarCliente(@PathVariable int id) {
         return ResponseEntity.ok(clienteService.eliminarCliente(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClienteEntity> actualizarCliente(@PathVariable int id, @RequestBody ClienteEntity cliente) {
+        return ResponseEntity.ok(clienteService.actualizarCliente(id, cliente));
     }
 }

@@ -1,9 +1,7 @@
 package com.example.Taller.Controller;
 
 import com.example.Taller.Entity.EstadoEntity;
-import com.example.Taller.Entity.MarcaEntity;
 import com.example.Taller.Service.EstadoService;
-import com.example.Taller.Service.MarcaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,5 +38,10 @@ public class EstadoController {
     public ResponseEntity<String> eliminarEstado(@PathVariable int id) {
         this.estadoService.eliminarEstado(id);
         return ResponseEntity.ok("Estado eliminado con éxito.");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EstadoEntity> actualizarEstado(@PathVariable int id, @RequestBody EstadoEntity estado) {
+        return ResponseEntity.ok(estadoService.actualizarEstado(id, estado));
     }
 }

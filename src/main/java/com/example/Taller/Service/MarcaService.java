@@ -12,4 +12,6 @@ public interface MarcaService {
     List<MarcaEntity> obtenerTodasLasMarcas();
 
     String eliminarMarca(int id);
+
+    MarcaEntity actualizarMarca(int id, MarcaEntity marca);
 }
