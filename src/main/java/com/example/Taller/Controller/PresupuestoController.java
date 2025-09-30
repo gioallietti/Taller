@@ -90,4 +90,10 @@ public class PresupuestoController {
         double ganancia = presupuestoService.calcularGananciaPorFechas(fechaInicio, fechaFin);
         return ResponseEntity.ok(ganancia);
     }
+
+    @GetMapping("/ingreso/{ingresoId}/costoRealRepuestos")
+    public ResponseEntity<Double> obtenerCostoRealRepuestos(@PathVariable Integer ingresoId) {
+        double costoReal = presupuestoService.obtenerCostoRealRepuestosPorIngreso(ingresoId);
+        return ResponseEntity.ok(costoReal);
+    }
 }

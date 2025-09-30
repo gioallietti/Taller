@@ -32,4 +32,6 @@ public interface PresupuestoService {
 
     double calcularGananciaPorFechas(LocalDate fechaInicio, LocalDate fechaFin);
 
+    double obtenerCostoRealRepuestosPorIngreso(Integer ingresoId);
+
 }

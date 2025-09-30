@@ -27,7 +27,7 @@ public class IngresoEntity {
     @ManyToOne(optional = false)
     private EquipoEntity equipo;
 
-    @Column(name = "numeroSerie", nullable = false, unique = true)
+    @Column(name = "numeroSerie", nullable = false)
     private String numeroSerie;
 
     @Column(nullable = false)

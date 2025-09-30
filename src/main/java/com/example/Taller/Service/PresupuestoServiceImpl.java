@@ -35,6 +35,11 @@ public class PresupuestoServiceImpl implements PresupuestoService{
         double totalConIva = presupuesto.getTotalSinIva() + (presupuesto.getTotalSinIva() * 0.22);
         presupuesto.setTotalIva(totalConIva);
 
+        IngresoEntity ingreso = ingresoRepository.findById(presupuesto.getIngreso().getId()).orElseThrow(() -> new IllegalArgumentException("Ingreso no encontrado"));
+        ingreso.setPresupuestado(true);
+        ingresoRepository.save(ingreso);
+        presupuesto.setIngreso(ingreso);
+
         return presupuestoRepository.save(presupuesto);
     }
 
@@ -182,5 +187,29 @@ public class PresupuestoServiceImpl implements PresupuestoService{
             totalGanancia += calcularGanancia(presupuesto);
         }
         return totalGanancia;
+    }
+
+    @Override
+    public double obtenerCostoRealRepuestosPorIngreso(Integer ingresoId) {
+        if (ingresoId == null) {
+            return 0.0;
+        }
+        IngresoEntity ingreso = ingresoRepository.findById(ingresoId).orElse(null);
+
+        if (ingreso == null) {
+            return 0.0;
+        }
+        double costoReal = 0.0;
+        List<IngresoRepuestoEntity> repuestosUsados = ingreso.getIngresoRepuestos();
+        if (repuestosUsados == null || repuestosUsados.isEmpty()) {
+            return 0.0;
+        }
+        for (IngresoRepuestoEntity ingresoRepuesto : repuestosUsados) {
+            double precioUno = ingresoRepuesto.getRepuesto().getPrecio();
+            int cantidad = ingresoRepuesto.getCantidad();
+            costoReal += precioUno * cantidad;
+        }
+
+        return costoReal;
     }
 }

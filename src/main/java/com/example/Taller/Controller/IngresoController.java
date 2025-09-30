@@ -135,7 +135,6 @@ public class IngresoController {
 
     @PutMapping("/estado/{id}")
     public ResponseEntity<IngresoEntity> actualizarIngresoEstado(@PathVariable int id, @RequestBody EstadoEntity estado) {
-
         return ResponseEntity.ok(ingresoService.actualizarIngresoEstado(id, estado));
     }
 
@@ -170,6 +169,12 @@ public class IngresoController {
     @GetMapping("/finalizados")
     public ResponseEntity<List<IngresoEntity>> listarFinalizados() {
         return ResponseEntity.ok(ingresoService.listarIngresosFinalizados());
+    }
+
+    @GetMapping("/existeSerie/{numeroSerie}")
+    public ResponseEntity<Boolean> existeNumeroSerie(@PathVariable String numeroSerie) {
+        boolean existe = ingresoService.existeNumeroSerie(numeroSerie);
+        return ResponseEntity.ok(existe);
     }
 
 }
