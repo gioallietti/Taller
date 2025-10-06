@@ -15,13 +15,13 @@ public interface PresupuestoRepository extends JpaRepository<PresupuestoEntity, 
 
     List<PresupuestoEntity> findByFechaBetween(LocalDate fechaInicio, LocalDate fechaFin);
 
-    @Query(value = "SELECT year(fecha) as año, sum(total_iva), sum(mano_de_obra), sum(costo_repuesto) \n" +
+    @Query(value = "SELECT year(fecha) as año, sum(total_sin_iva), sum(mano_de_obra), sum(costo_repuesto) \n" +
             "FROM taller4.presupuestos \n" +
             "GROUP BY year(fecha) \n" +
             "order by year(fecha) desc", nativeQuery = true)
     List<Object[]> obtenerPresupuestosPorAnio();
 
-    @Query (value = "SELECT DATE_FORMAT(fecha, '%Y-%m') as mes, sum(total_iva), sum(mano_de_obra), sum(costo_repuesto) \n" +
+    @Query (value = "SELECT DATE_FORMAT(fecha, '%Y-%m') as mes, sum(total_sin_iva), sum(mano_de_obra), sum(costo_repuesto) \n" +
             "FROM taller4.presupuestos \n" +
             "GROUP BY mes \n" +
             "order by mes desc", nativeQuery = true)
