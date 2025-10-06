@@ -34,10 +34,6 @@ public class IngresoServiceImpl implements IngresoService{
     @Override
     public IngresoEntity guardarIngreso(IngresoEntity ingreso) {
 
-        if (ingresoRepository.findByNumeroSerie(ingreso.getNumeroSerie()) != null){
-            throw new IllegalArgumentException("Ya se ha ingresado un equipo con ese numero de serie");
-        }
-
         if (ingreso.getCliente() == null || ingreso.getCliente().getId() == null || !clienteRepository.existsById(ingreso.getCliente().getId())) {
             throw new IllegalArgumentException("El cliente no existe, Por favor proba con otro");
         }
@@ -202,5 +198,10 @@ public class IngresoServiceImpl implements IngresoService{
     @Override
     public List<IngresoEntity> listarIngresosFinalizados() {
         return ingresoRepository.findByEstadoId(5) ;
+    }
+
+    @Override
+    public boolean existeNumeroSerie(String numeroSerie) {
+        return ingresoRepository.findByNumeroSerie(numeroSerie) != null;
     }
 }
