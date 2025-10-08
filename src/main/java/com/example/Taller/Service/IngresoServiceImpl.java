@@ -44,7 +44,7 @@ public class IngresoServiceImpl implements IngresoService{
 
 
         if (ingreso.getEquipo() == null || ingreso.getEquipo().getId() == null || !equipoRepository.existsById(ingreso.getEquipo().getId())){
-            throw new IllegalArgumentException("El cliente no existe, Por favor proba con otro");
+            throw new IllegalArgumentException("El equipo no existe, Por favor proba con otro");
         }
 
         return ingresoRepository.save(ingreso);

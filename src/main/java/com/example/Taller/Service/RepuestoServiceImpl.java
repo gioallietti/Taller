@@ -49,16 +49,6 @@ public class RepuestoServiceImpl implements RepuestoService{
         return repuestoRepository.save(repuesto);
     }
 
-    /*@Override
-    public RepuestoEntity guardarRepuesto(RepuestoEntity repuesto) {
-
-        if(repuesto.getModelo().length() > 30){
-            throw new IllegalArgumentException("EL nombre del modelo demasiado largo");
-        }
-
-        return repuestoRepository.save(repuesto);
-    }*/
-
     @Override
     public RepuestoEntity actualizarRepuesto(RepuestoEntity repuesto){
         try {
