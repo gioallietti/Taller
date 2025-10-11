@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer> {
-    List<IngresoEntity> findAllByOrderByPrioridadAsc();
+    List<IngresoEntity> findAllByOrderByPrioridadAscFechaIngresoAsc();
 
     List<IngresoEntity> findByFechaIngresoBetween(LocalDate desde, LocalDate hasta);
 
