@@ -72,7 +72,7 @@ public class IngresoServiceImpl implements IngresoService{
 
     @Override
     public List<IngresoEntity> listarPorPrioridad(){
-        return ingresoRepository.findAllByOrderByPrioridadAsc();
+        return ingresoRepository.findAllByOrderByPrioridadAscFechaIngresoAsc();
     }
 
     @Override
