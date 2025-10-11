@@ -45,5 +45,8 @@ public interface IngresoService {
     List<IngreosPorMesAnioDTO> obtenerIngresosPorMes();
 
     boolean existeNumeroSerie(String numeroSerie);
+
+    List<IngresoEntity> obtenerIngresosSinSolucion();
+
 }
 

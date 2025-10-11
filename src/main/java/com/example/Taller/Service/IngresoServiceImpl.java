@@ -204,4 +204,11 @@ public class IngresoServiceImpl implements IngresoService{
     public boolean existeNumeroSerie(String numeroSerie) {
         return ingresoRepository.findByNumeroSerie(numeroSerie) != null;
     }
+    
+    @Override
+    public List<IngresoEntity> obtenerIngresosSinSolucion() {
+        LocalDate fecha = LocalDate.now().minusMonths(3);
+        return ingresoRepository.findByEstadoIdAndFechaFinalizacionAfterOrderByFechaFinalizacionDesc(6, fecha);
+    }
+
 }
