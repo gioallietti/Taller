@@ -177,4 +177,9 @@ public class IngresoController {
         return ResponseEntity.ok(existe);
     }
 
+    @GetMapping("/sinSolucion")
+    public ResponseEntity<List<IngresoEntity>> obtenerIngresosSinSolucion() {
+        return ResponseEntity.ok(ingresoService.obtenerIngresosSinSolucion());
+    }
+
 }

@@ -72,7 +72,7 @@ public class IngresoServiceImpl implements IngresoService{
 
     @Override
     public List<IngresoEntity> listarPorPrioridad(){
-        return ingresoRepository.findAllByOrderByPrioridadAsc();
+        return ingresoRepository.findAllByOrderByPrioridadAscFechaIngresoAsc();
     }
 
     @Override
@@ -204,4 +204,11 @@ public class IngresoServiceImpl implements IngresoService{
     public boolean existeNumeroSerie(String numeroSerie) {
         return ingresoRepository.findByNumeroSerie(numeroSerie) != null;
     }
+    
+    @Override
+    public List<IngresoEntity> obtenerIngresosSinSolucion() {
+        LocalDate fecha = LocalDate.now().minusMonths(3);
+        return ingresoRepository.findByEstadoIdAndFechaFinalizacionAfterOrderByFechaFinalizacionDesc(6, fecha);
+    }
+
 }

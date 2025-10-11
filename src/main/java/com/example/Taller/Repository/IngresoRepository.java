@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer> {
-    List<IngresoEntity> findAllByOrderByPrioridadAsc();
+    List<IngresoEntity> findAllByOrderByPrioridadAscFechaIngresoAsc();
 
     List<IngresoEntity> findByFechaIngresoBetween(LocalDate desde, LocalDate hasta);
 
@@ -44,4 +44,6 @@ public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer>
             "  AND fecha_finalizacion >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH) \n " +
             "  order by fecha_finalizacion desc", nativeQuery = true)
     List<IngresoEntity>  obtenerIngresosFinalizados();
+
+    List<IngresoEntity> findByEstadoIdAndFechaFinalizacionAfterOrderByFechaFinalizacionDesc(Integer estado, LocalDate fecha);
 }
