@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping({"/equipos"})
 @CrossOrigin(
-        origins = {"http://localhost:3000"}
+        origins = {"*"}
 )
 public class EquipoController {
     @Autowired
