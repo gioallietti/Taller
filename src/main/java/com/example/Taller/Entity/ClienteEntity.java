@@ -18,12 +18,12 @@ public class ClienteEntity extends PersonaEntity{
     @Column(nullable = true)
     private String telefono2;
 
+    @Column(nullable = false)
+    private Boolean activo = true;
+
     public String getTelefono2() {
         return telefono2;
     }
-
-    @Column(nullable = false)
-    private Boolean activo = true;
 
     public Boolean getActivo() {
         return activo;

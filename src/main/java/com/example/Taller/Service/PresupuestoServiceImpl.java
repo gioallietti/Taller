@@ -62,7 +62,7 @@ public class PresupuestoServiceImpl implements PresupuestoService{
 
     @Override
     public List<PresupuestoEntity> obtenerTodosLosPresupuestos() {
-        return presupuestoRepository.findAll();
+        return presupuestoRepository.findAllByOrderByIdDesc();
     }
 
     @Override

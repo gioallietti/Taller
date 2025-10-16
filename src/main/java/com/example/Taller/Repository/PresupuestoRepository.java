@@ -15,6 +15,8 @@ public interface PresupuestoRepository extends JpaRepository<PresupuestoEntity, 
 
     List<PresupuestoEntity> findByFechaBetween(LocalDate fechaInicio, LocalDate fechaFin);
 
+    List<PresupuestoEntity> findAllByOrderByIdDesc();
+
     @Query(value = "SELECT year(fecha) as año, sum(total_sin_iva), sum(mano_de_obra), sum(costo_repuesto) \n" +
             "FROM taller4.presupuestos \n" +
             "GROUP BY year(fecha) \n" +
