@@ -156,6 +156,8 @@ public class IngresoServiceImpl implements IngresoService{
 
             dto.setMesAnio(((String) fila[0].toString()));
             dto.setCantidad(((Number) fila[1]).intValue());
+            dto.setCantidadReparados(((Number) fila[2]).intValue());
+
 
             ingreosPorMesAnioDTOList.add(dto);
         }
@@ -173,6 +175,7 @@ public class IngresoServiceImpl implements IngresoService{
 
             dto.setMesAnio(((String) fila[0].toString()));
             dto.setCantidad(((Number) fila[1]).intValue());
+            dto.setCantidadReparados(((Number) fila[2]).intValue());
 
             ingreosPorMesAnioDTOList.add(dto);
         }
