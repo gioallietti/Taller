@@ -27,13 +27,13 @@ public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer>
 
     IngresoEntity findByNumeroSerie(String numeroSerie);
 
-    @Query (value = "SELECT year(fecha_ingreso) as anio, COUNT(*) as cantidad \n" +
+    @Query (value = "SELECT year(fecha_ingreso) as anio, COUNT(*) as cantidad, SUM(estado_id = 5) as cantidadReparados \n" +
             "FROM taller4.ingresos \n" +
             "GROUP BY year(fecha_ingreso) \n" +
             "order by year(fecha_ingreso) desc", nativeQuery = true)
     List<Object[]>  obtenerIngresosPorAnio();
 
-    @Query (value = "SELECT DATE_FORMAT(fecha_ingreso, '%Y-%m') as mes,  COUNT(*) as cantidad \n" +
+    @Query (value = "SELECT DATE_FORMAT(fecha_ingreso, '%Y-%m') as mes,  COUNT(*) as cantidad, SUM(estado_id = 5) as cantidadReparados \n" +
             "FROM taller4.ingresos \n" +
             "GROUP BY mes \n" +
             "order by mes desc", nativeQuery = true)
